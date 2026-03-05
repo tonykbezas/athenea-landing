@@ -1,0 +1,141 @@
+---
+const testimonials = [
+  {
+    name: 'Carlos Mendoza',
+    role: 'Dueño',
+    gym: 'CrossFit Titán',
+    quote: 'AtheneaFit transformó completamente nuestra operación. Antes pasábamos horas con planillas de Excel, ahora todo se gestiona en minutos. La función de conciliación de pagos es increíble.',
+    avatar: '💪',
+    avatarBg: '#22c55e',
+  },
+  {
+    name: 'Ana Lucía Torres',
+    role: 'Administradora',
+    gym: 'FitZone Premium',
+    quote: 'Lo que más me gusta es el dashboard. Puedo ver en tiempo real cuántos miembros tenemos activos, los ingresos del mes, y las suscripciones por vencer. Nos ahorró un empleado.',
+    avatar: '🏋️',
+    avatarBg: '#3b82f6',
+  },
+  {
+    name: 'Roberto Salazar',
+    role: 'Director',
+    gym: 'PowerGym (3 sedes)',
+    quote: 'Con la función multi-gimnasio de AtheneaFit manejo mis 3 sedes desde un solo lugar. Antes necesitaba un sistema diferente para cada una. El soporte es de primer nivel.',
+    avatar: '🎯',
+    avatarBg: '#f59e0b',
+  },
+];
+---
+
+<section id="testimonials" class="testimonials-section">
+  <div class="container">
+    <div class="testimonials-header">
+      <div class="section-label">
+        <i class='bx bx-conversation'></i>
+        Testimonios
+      </div>
+      <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+      <p class="section-subtitle">
+        Gimnasios de todos los tamaños confían en AtheneaFit para gestionar su día a día.
+      </p>
+    </div>
+
+    <div class="testimonials-grid grid grid-3">
+      {testimonials.map((t) => (
+        <div class="testimonial-card card">
+          <div class="testimonial-stars">
+            <i class='bx bxs-star'></i>
+            <i class='bx bxs-star'></i>
+            <i class='bx bxs-star'></i>
+            <i class='bx bxs-star'></i>
+            <i class='bx bxs-star'></i>
+          </div>
+          <blockquote class="testimonial-quote">
+            "{t.quote}"
+          </blockquote>
+          <div class="testimonial-author">
+            <div class="author-avatar" style={`background: ${t.avatarBg}`}>
+              {t.avatar}
+            </div>
+            <div>
+              <div class="author-name">{t.name}</div>
+              <div class="author-role">{t.role} · {t.gym}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials-section {
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .testimonials-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .testimonials-header .section-subtitle {
+    margin: 0 auto;
+  }
+
+  .testimonial-card {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .testimonial-stars {
+    display: flex;
+    gap: 0.15rem;
+    margin-bottom: 1.25rem;
+    color: var(--text-primary);
+    font-size: 1rem;
+  }
+
+  .testimonial-quote {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    flex: 1;
+    border: none;
+    padding: 0;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-top: 1px solid var(--border-light);
+    padding-top: 1.25rem;
+  }
+
+  .author-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .author-name {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .author-role {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+</style>

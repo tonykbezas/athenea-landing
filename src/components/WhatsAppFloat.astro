@@ -1,0 +1,106 @@
+---
+const whatsappNumber = '593987371697';
+const message = '¡Hola! Me interesa conocer más sobre AtheneaFit para mi gimnasio. ¿Me pueden ayudar?';
+const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+---
+
+<a
+  href={waUrl}
+  class="whatsapp-float"
+  target="_blank"
+  rel="noopener"
+  aria-label="Contactar por WhatsApp"
+  id="whatsappFloat"
+>
+  <i class='bx bxl-whatsapp'></i>
+  <span class="wa-tooltip">¿Necesitas ayuda?</span>
+</a>
+
+<style>
+  .whatsapp-float {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 999;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #25D366;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    box-shadow:
+      0 4px 16px rgba(37, 211, 102, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    animation: waFloat 3s ease-in-out infinite;
+  }
+
+  .whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow:
+      0 6px 24px rgba(37, 211, 102, 0.4),
+      0 4px 12px rgba(0, 0, 0, 0.3);
+    color: white;
+  }
+
+  .wa-tooltip {
+    position: absolute;
+    right: calc(100% + 12px);
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    padding: 0.5rem 0.875rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    box-shadow: var(--shadow);
+  }
+
+  .wa-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-left-color: var(--border);
+  }
+
+  .whatsapp-float:hover .wa-tooltip {
+    opacity: 1;
+  }
+
+  @keyframes waFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  .whatsapp-float:hover {
+    animation: none;
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 640px) {
+    .whatsapp-float {
+      width: 50px;
+      height: 50px;
+      font-size: 1.5rem;
+      bottom: 1rem;
+      right: 1rem;
+    }
+
+    .wa-tooltip {
+      display: none;
+    }
+  }
+</style>

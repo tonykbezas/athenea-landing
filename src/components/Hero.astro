@@ -1,0 +1,309 @@
+---
+---
+
+<section class="hero">
+  <!-- Glow effect -->
+  <div class="hero-glow"></div>
+  <div class="hero-grid-bg"></div>
+
+  <div class="container hero-content">
+    <div class="hero-text">
+      <div class="section-label">
+        <i class='bx bx-rocket'></i>
+        Smart Gym Management
+      </div>
+
+      <h1 class="hero-title">
+        Gestiona tu Gimnasio de Forma
+        <span class="gradient-text">Inteligente</span>
+      </h1>
+
+      <p class="hero-description">
+        Control total de suscripciones, clientes, pagos, gastos y reportes en tiempo real.
+        La plataforma todo-en-uno que tu gimnasio necesita para crecer.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#cta" class="btn btn-primary btn-lg">
+          <i class='bx bx-rocket'></i>
+          Comenzar Gratis
+        </a>
+        <a href="#features" class="btn btn-secondary btn-lg">
+          <i class='bx bx-play-circle'></i>
+          Ver Características
+        </a>
+      </div>
+
+      <div class="hero-trust">
+        <div class="trust-avatars">
+          <div class="trust-avatar" style="background: #2A2D33;">🏋️</div>
+          <div class="trust-avatar" style="background: #383C42;">💪</div>
+          <div class="trust-avatar" style="background: #2A2D33;">🏅</div>
+          <div class="trust-avatar" style="background: #383C42;">🎯</div>
+        </div>
+        <p class="trust-text">
+          <strong>+150 gimnasios</strong> ya confían en AtheneaFit
+        </p>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <!-- Logo showcase -->
+      <div class="hero-logo-showcase animate-float">
+        <img src="/logo.png" alt="AtheneaFit" class="hero-logo-img" />
+      </div>
+
+      <!-- Floating stat cards -->
+      <div class="floating-card card-1 animate-float">
+        <div class="floating-icon success">
+          <i class='bx bx-check-circle'></i>
+        </div>
+        <div>
+          <span class="floating-label">Suscripciones Activas</span>
+          <span class="floating-value">248</span>
+        </div>
+      </div>
+
+      <div class="floating-card card-2 animate-float" style="animation-delay: -2s;">
+        <div class="floating-icon info">
+          <i class='bx bx-trending-up'></i>
+        </div>
+        <div>
+          <span class="floating-label">Crecimiento Mensual</span>
+          <span class="floating-value brand-text">+18.5%</span>
+        </div>
+      </div>
+
+      <div class="floating-card card-3 animate-float" style="animation-delay: -4s;">
+        <div class="floating-icon warning">
+          <i class='bx bx-dollar-circle'></i>
+        </div>
+        <div>
+          <span class="floating-label">Ingresos del Mes</span>
+          <span class="floating-value">$42,850</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: var(--navbar-height);
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 600px;
+    background: radial-gradient(ellipse, rgba(255, 255, 255, 0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(44, 47, 53, 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(44, 47, 53, 0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-text {
+    animation: fadeInUp 0.8s ease;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 5vw, 3.75rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.03em;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #FFFFFF, #B0B3B8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-description {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-trust {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .trust-avatars {
+    display: flex;
+  }
+
+  .trust-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    border: 2px solid var(--bg-body);
+    margin-left: -8px;
+  }
+
+  .trust-avatar:first-child {
+    margin-left: 0;
+  }
+
+  .trust-text {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  .trust-text strong {
+    color: var(--text-primary);
+  }
+
+  /* Visual side */
+  .hero-visual {
+    position: relative;
+    height: 480px;
+    animation: fadeInUp 1s ease 0.2s both;
+  }
+
+  /* Logo showcase */
+  .hero-logo-showcase {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+
+  .hero-logo-img {
+    width: 280px;
+    height: 280px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.1));
+    border-radius: var(--radius-xl);
+  }
+
+  /* Floating cards */
+  .floating-card {
+    position: absolute;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 0.875rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: var(--shadow-lg);
+    z-index: 2;
+    min-width: 200px;
+  }
+
+  .card-1 { top: 20px; right: 0; }
+  .card-2 { bottom: 30%; left: -20px; }
+  .card-3 { bottom: 30px; right: 20px; }
+
+  .floating-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+  }
+
+  .floating-icon.success { background: var(--accent-success-dim); color: var(--accent-success); }
+  .floating-icon.info { background: var(--accent-info-dim); color: var(--accent-info); }
+  .floating-icon.warning { background: var(--accent-warning-dim); color: var(--accent-warning); }
+
+  .floating-label {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .floating-value {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .brand-text { color: var(--text-primary) !important; }
+
+  @media (max-width: 1024px) {
+    .hero-content {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .hero-description {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      justify-content: center;
+    }
+
+    .hero-trust {
+      justify-content: center;
+    }
+
+    .hero-visual {
+      display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero-title {
+      font-size: 2.25rem;
+    }
+
+    .hero-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>

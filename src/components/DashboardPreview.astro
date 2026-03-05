@@ -1,0 +1,431 @@
+---
+---
+
+<section id="dashboard" class="dashboard-section">
+  <div class="container">
+    <div class="dashboard-header">
+      <div class="section-label">
+        <i class='bx bx-bar-chart-alt-2'></i>
+        Dashboard
+      </div>
+      <h2 class="section-title">Analítica en tiempo real a tu alcance</h2>
+      <p class="section-subtitle">
+        Visualiza métricas clave, tendencias financieras y el estado de tu gimnasio de un vistazo.
+      </p>
+    </div>
+
+    <div class="dashboard-showcase">
+      <div class="browser-chrome">
+        <div class="chrome-topbar">
+          <div class="chrome-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+          </div>
+          <div class="chrome-address">
+            <i class='bx bx-lock-alt'></i>
+            <span>app.atheneafit.com/dashboard</span>
+          </div>
+          <div class="chrome-actions">
+            <i class='bx bx-minus'></i>
+            <i class='bx bx-square'></i>
+            <i class='bx bx-x'></i>
+          </div>
+        </div>
+
+        <div class="dashboard-body">
+          <!-- Sidebar -->
+          <div class="dash-sidebar">
+            <div class="sb-logo">
+              <div class="sb-logo-icon">A</div>
+              <span class="sb-logo-text">AtheneaFit</span>
+            </div>
+            <div class="sb-nav">
+              <div class="sb-item active"><i class='bx bx-grid-alt'></i><span>Dashboard</span></div>
+              <div class="sb-item"><i class='bx bx-group'></i><span>Clientes</span></div>
+              <div class="sb-item"><i class='bx bx-calendar'></i><span>Suscripciones</span></div>
+              <div class="sb-item"><i class='bx bx-credit-card'></i><span>Pagos</span></div>
+              <div class="sb-item"><i class='bx bx-trending-down'></i><span>Gastos</span></div>
+              <div class="sb-item"><i class='bx bx-bell'></i><span>Notificaciones</span></div>
+              <div class="sb-item"><i class='bx bx-cog'></i><span>Configuración</span></div>
+            </div>
+          </div>
+
+          <!-- Main content -->
+          <div class="dash-main">
+            <!-- Quick action buttons -->
+            <div class="dash-quick-actions">
+              <div class="qa-btn warning"><i class='bx bx-id-card'></i>Cobrar</div>
+              <div class="qa-btn primary"><i class='bx bx-calendar-plus'></i>Suscripción</div>
+              <div class="qa-btn success"><i class='bx bx-user-plus'></i>Cliente</div>
+              <div class="qa-btn info"><i class='bx bx-cart'></i>Venta Rápida</div>
+            </div>
+
+            <!-- Metric cards row -->
+            <div class="dash-metrics">
+              <div class="metric-card-mock">
+                <div class="mc-icon green"><i class='bx bx-check-circle'></i></div>
+                <div class="mc-label">Activas</div>
+                <div class="mc-value">156</div>
+                <div class="mc-trend green-text">+12%</div>
+              </div>
+              <div class="metric-card-mock">
+                <div class="mc-icon red"><i class='bx bx-x-circle'></i></div>
+                <div class="mc-label">Vencidas</div>
+                <div class="mc-value">23</div>
+                <div class="mc-trend red-text">-5%</div>
+              </div>
+              <div class="metric-card-mock">
+                <div class="mc-icon orange"><i class='bx bx-time-five'></i></div>
+                <div class="mc-label">Gracia</div>
+                <div class="mc-value">8</div>
+                <div class="mc-trend orange-text">Atención</div>
+              </div>
+              <div class="metric-card-mock">
+                <div class="mc-icon blue"><i class='bx bx-group'></i></div>
+                <div class="mc-label">Miembros</div>
+                <div class="mc-value">312</div>
+                <div class="mc-trend blue-text">+18</div>
+              </div>
+            </div>
+
+            <!-- Chart area -->
+            <div class="dash-chart-area">
+              <div class="chart-card">
+                <div class="chart-header">
+                  <h4>Ingresos vs Gastos</h4>
+                  <span class="chart-badge">6 meses</span>
+                </div>
+                <svg class="chart-full" viewBox="0 0 500 140">
+                  <defs>
+                    <linearGradient id="incomeGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#22c55e" stop-opacity="0.25"/>
+                      <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+                    </linearGradient>
+                    <linearGradient id="expenseGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#ef4444" stop-opacity="0.15"/>
+                      <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <!-- Income line -->
+                  <path d="M0,100 Q50,85 100,75 T200,50 T300,55 T400,35 T500,25" fill="none" stroke="#22c55e" stroke-width="2.5"/>
+                  <path d="M0,100 Q50,85 100,75 T200,50 T300,55 T400,35 T500,25 V140 H0 Z" fill="url(#incomeGrad)"/>
+                  <!-- Expense line -->
+                  <path d="M0,110 Q50,105 100,108 T200,95 T300,100 T400,90 T500,85" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,3"/>
+                  <path d="M0,110 Q50,105 100,108 T200,95 T300,100 T400,90 T500,85 V140 H0 Z" fill="url(#expenseGrad)"/>
+                </svg>
+              </div>
+              <div class="summary-card">
+                <div class="summary-row">
+                  <div class="sum-icon green"><i class='bx bx-trending-up'></i></div>
+                  <div>
+                    <div class="sum-label">Ingresos</div>
+                    <div class="sum-value">$42,850</div>
+                  </div>
+                  <span class="sum-change green-text">+14%</span>
+                </div>
+                <div class="summary-row">
+                  <div class="sum-icon red"><i class='bx bx-trending-down'></i></div>
+                  <div>
+                    <div class="sum-label">Gastos</div>
+                    <div class="sum-value">$18,230</div>
+                  </div>
+                  <span class="sum-change red-text">+3%</span>
+                </div>
+                <hr />
+                <div class="summary-row">
+                  <div class="sum-icon blue"><i class='bx bx-wallet'></i></div>
+                  <div>
+                    <div class="sum-label">Beneficio Neto</div>
+                    <div class="sum-value profit">$24,620</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .dashboard-section {
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .dashboard-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .dashboard-header .section-subtitle {
+    margin: 0 auto;
+  }
+
+  /* Browser chrome */
+  .browser-chrome {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-lg), 0 0 60px rgba(255, 255, 255, 0.03);
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .chrome-topbar {
+    background: var(--bg-primary);
+    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .chrome-dots {
+    display: flex;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-red { background: #ef4444; }
+  .dot-yellow { background: #f59e0b; }
+  .dot-green { background: #22c55e; }
+
+  .chrome-address {
+    flex: 1;
+    background: var(--bg-card);
+    border-radius: var(--radius-sm);
+    padding: 0.3rem 0.75rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .chrome-actions {
+    display: flex;
+    gap: 0.75rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+  }
+
+  /* Dashboard body */
+  .dashboard-body {
+    display: flex;
+    background: var(--bg-body);
+    min-height: 380px;
+  }
+
+  .dash-sidebar {
+    width: 180px;
+    background: var(--bg-primary);
+    border-right: 1px solid var(--border);
+    padding: 1rem 0;
+    flex-shrink: 0;
+  }
+
+  .sb-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1rem 1rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0.75rem;
+  }
+
+  .sb-logo-icon {
+    width: 28px;
+    height: 28px;
+    background: var(--text-primary);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.75rem;
+    color: var(--bg-primary);
+  }
+
+  .sb-logo-text {
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+  }
+
+  .sb-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sb-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+  }
+
+  .sb-item.active {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+    border-left: 2px solid var(--text-primary);
+  }
+
+  .sb-item i { font-size: 1rem; }
+
+  /* Main content */
+  .dash-main {
+    flex: 1;
+    padding: 1rem;
+    overflow: hidden;
+  }
+
+  .dash-quick-actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .qa-btn {
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.65rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    color: white;
+  }
+
+  .qa-btn i { font-size: 0.85rem; }
+
+  .qa-btn.warning { background: var(--accent-warning); color: #000; }
+  .qa-btn.primary { background: var(--bg-primary); border: 1px solid var(--border); }
+  .qa-btn.success { background: var(--accent-success); }
+  .qa-btn.info { background: var(--accent-info); }
+
+  .dash-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .metric-card-mock {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.6rem;
+  }
+
+  .mc-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .mc-icon.green { background: var(--accent-success-dim); color: var(--accent-success); }
+  .mc-icon.red { background: var(--accent-danger-dim); color: var(--accent-danger); }
+  .mc-icon.orange { background: var(--accent-warning-dim); color: var(--accent-warning); }
+  .mc-icon.blue { background: var(--accent-info-dim); color: var(--accent-info); }
+
+  .mc-label { font-size: 0.6rem; color: var(--text-muted); margin-bottom: 0.15rem; }
+  .mc-value { font-size: 1rem; font-weight: 800; color: var(--text-primary); }
+  .mc-trend { font-size: 0.6rem; font-weight: 600; }
+
+  .green-text { color: var(--accent-success); }
+  .red-text { color: var(--accent-danger); }
+  .orange-text { color: var(--accent-warning); }
+  .blue-text { color: var(--accent-info); }
+
+  .dash-chart-area {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .chart-card,
+  .summary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.75rem;
+  }
+
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .chart-header h4 {
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .chart-badge {
+    font-size: 0.6rem;
+    background: var(--bg-secondary);
+    padding: 0.15rem 0.5rem;
+    border-radius: 100px;
+    color: var(--text-muted);
+  }
+
+  .chart-full { width: 100%; height: 80px; }
+
+  .summary-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0;
+  }
+
+  .sum-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+  }
+
+  .sum-icon.green { background: var(--accent-success-dim); color: var(--accent-success); }
+  .sum-icon.red { background: var(--accent-danger-dim); color: var(--accent-danger); }
+  .sum-icon.blue { background: var(--accent-info-dim); color: var(--accent-info); }
+
+  .sum-label { font-size: 0.6rem; color: var(--text-muted); }
+  .sum-value { font-size: 0.75rem; font-weight: 700; color: var(--text-primary); }
+  .sum-value.profit { font-size: 0.9rem; color: var(--text-primary); }
+  .sum-change { font-size: 0.65rem; font-weight: 600; margin-left: auto; }
+
+  .summary-card hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0.25rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .dash-sidebar { display: none; }
+    .dash-quick-actions { grid-template-columns: repeat(2, 1fr); }
+    .dash-metrics { grid-template-columns: repeat(2, 1fr); }
+    .dash-chart-area { grid-template-columns: 1fr; }
+    .chrome-actions { display: none; }
+  }
+</style>

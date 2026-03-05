@@ -1,0 +1,355 @@
+---
+const whatsappNumber = '593987371697';
+---
+
+<section id="cta" class="cta-section">
+  <div class="cta-glow"></div>
+
+  <div class="container cta-container">
+    <h2 class="cta-title">
+      ¿Listo para transformar<br/>tu gimnasio?
+    </h2>
+    <p class="cta-description">
+      Únete a más de 150 gimnasios que ya optimizaron su gestión con AtheneaFit.
+      Completa el formulario y te contactamos para tu prueba gratuita de 14 días.
+    </p>
+
+    <form id="leadForm" class="lead-form" novalidate>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="leadName">
+            <i class='bx bx-user'></i>
+            Nombre completo
+          </label>
+          <input
+            type="text"
+            id="leadName"
+            name="name"
+            placeholder="Tu nombre"
+            required
+            autocomplete="name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="leadEmail">
+            <i class='bx bx-envelope'></i>
+            Correo electrónico
+          </label>
+          <input
+            type="email"
+            id="leadEmail"
+            name="email"
+            placeholder="tu@email.com"
+            required
+            autocomplete="email"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="leadPhone">
+            <i class='bx bxl-whatsapp'></i>
+            WhatsApp
+          </label>
+          <input
+            type="tel"
+            id="leadPhone"
+            name="phone"
+            placeholder="+593 999 999 999"
+            required
+            autocomplete="tel"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="leadGym">
+            <i class='bx bx-building-house'></i>
+            Nombre del gimnasio
+          </label>
+          <input
+            type="text"
+            id="leadGym"
+            name="gym"
+            placeholder="Mi Gimnasio (opcional)"
+            autocomplete="organization"
+          />
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-lg btn-submit" id="submitBtn">
+        <i class='bx bx-rocket'></i>
+        <span>Comenzar Prueba Gratis</span>
+      </button>
+
+      <p class="cta-note">
+        <i class='bx bx-check-circle'></i>
+        14 días gratis · Sin tarjeta · Cancela cuando quieras
+      </p>
+    </form>
+
+    <!-- Success state -->
+    <div id="formSuccess" class="form-success" style="display: none;">
+      <div class="success-icon">
+        <i class='bx bx-check-circle'></i>
+      </div>
+      <h3>¡Gracias por tu interés!</h3>
+      <p>Te redirigimos a WhatsApp para comenzar tu prueba gratuita...</p>
+      <a id="whatsappLink" href="#" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+        <i class='bx bxl-whatsapp'></i>
+        Abrir WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  #cta.cta-section {
+    position: relative;
+    padding: 6rem 0;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 60%),
+      var(--bg-body);
+    border-top: 1px solid var(--border-light);
+  }
+
+  #cta .cta-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(255, 255, 255, 0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  #cta .cta-container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 640px;
+  }
+
+  #cta .cta-title {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 900;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  #cta .cta-description {
+    font-size: 1.0625rem;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+
+  /* Lead Form */
+  #cta .lead-form {
+    text-align: left;
+  }
+
+  #cta .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  #cta .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #cta .form-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.4rem;
+  }
+
+  #cta .form-group label i {
+    font-size: 1rem;
+    color: var(--text-muted);
+  }
+
+  #cta .form-group input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.9375rem;
+    transition: all 0.2s;
+    outline: none;
+  }
+
+  #cta .form-group input::placeholder {
+    color: var(--text-muted);
+  }
+
+  #cta .form-group input:focus {
+    border-color: var(--text-primary);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
+  }
+
+  #cta .form-group input.error {
+    border-color: var(--accent-danger);
+    box-shadow: 0 0 0 3px var(--accent-danger-dim);
+  }
+
+  #cta .btn-submit {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.0625rem;
+    margin-bottom: 1rem;
+  }
+
+  #cta .btn-submit.loading {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  #cta .cta-note {
+    text-align: center;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+
+  #cta .cta-note i {
+    color: var(--text-primary);
+  }
+
+  /* Success state */
+  #cta .form-success {
+    text-align: center;
+    animation: fadeInUp 0.5s ease;
+  }
+
+  #cta .success-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--accent-brand-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    margin: 0 auto 1.25rem;
+    border: 1px solid var(--border);
+  }
+
+  #cta .form-success h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  #cta .form-success p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  #cta .form-success .btn {
+    background: #25D366;
+    border-color: #25D366;
+    color: white;
+  }
+
+  #cta .form-success .btn:hover {
+    background: #20BD5A;
+    border-color: #20BD5A;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.25);
+  }
+
+  @media (max-width: 640px) {
+    #cta .form-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script define:vars={{ whatsappNumber }}>
+  const form = document.getElementById('leadForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const formSuccess = document.getElementById('formSuccess');
+  const whatsappLink = document.getElementById('whatsappLink');
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Get values
+      const name = document.getElementById('leadName').value.trim();
+      const email = document.getElementById('leadEmail').value.trim();
+      const phone = document.getElementById('leadPhone').value.trim();
+      const gym = document.getElementById('leadGym').value.trim();
+
+      // Basic validation
+      let valid = true;
+      document.querySelectorAll('.form-group input').forEach(input => {
+        input.classList.remove('error');
+      });
+
+      if (!name) {
+        document.getElementById('leadName').classList.add('error');
+        valid = false;
+      }
+      if (!email || !email.includes('@')) {
+        document.getElementById('leadEmail').classList.add('error');
+        valid = false;
+      }
+      if (!phone) {
+        document.getElementById('leadPhone').classList.add('error');
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      // Show loading
+      submitBtn.classList.add('loading');
+      submitBtn.querySelector('span').textContent = 'Enviando...';
+
+      // Build WhatsApp message
+      const gymText = gym ? ` del gimnasio "${gym}"` : '';
+      const message = `¡Hola! Soy ${name}${gymText}. Me interesa probar AtheneaFit. Mi correo es ${email} y mi teléfono ${phone}. ¿Me pueden ayudar con la prueba gratuita?`;
+      const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+      // Try to send to Formspree (optional — configure your form ID)
+      try {
+        // Uncomment and add your Formspree ID to enable data storage:
+        // await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify({ name, email, phone, gym }),
+        // });
+        console.log('Lead captured:', { name, email, phone, gym });
+      } catch (err) {
+        console.warn('Formspree not configured, redirecting to WhatsApp only.');
+      }
+
+      // Show success + set WhatsApp link
+      form.style.display = 'none';
+      formSuccess.style.display = 'block';
+      whatsappLink.href = waUrl;
+
+      // Auto-open WhatsApp after a short delay
+      setTimeout(() => {
+        window.open(waUrl, '_blank');
+      }, 1200);
+    });
+  }
+</script>
