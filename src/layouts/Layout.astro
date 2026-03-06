@@ -5,9 +5,13 @@ interface Props {
 }
 
 const {
-  title = "AtheneaFit — Smart Gym Management",
-  description = "Gestiona tu gimnasio de forma inteligente. Control total de suscripciones, clientes, pagos, gastos y reportes en una sola plataforma."
+  title = "AtheneaFit — Software de Gestión para Gimnasios",
+  description = "Gestiona tu gimnasio de forma inteligente. Control total de suscripciones, clientes, pagos, gastos y reportes en una sola plataforma. Prueba gratis 14 días."
 } = Astro.props;
+
+const siteUrl = "https://atheneafit.com";
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const ogImageUrl = `${siteUrl}/logo.png`;
 ---
 
 <!doctype html>
@@ -18,18 +22,90 @@ const {
     <meta name="description" content={description} />
     <meta name="theme-color" content="#111318" />
 
+    <!-- SEO -->
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="software gimnasio, gestión gimnasio, administración gym, control suscripciones gimnasio, software fitness, ERP gimnasio, AtheneaFit" />
+
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content="AtheneaFit - Software de Gestión para Gimnasios" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="AtheneaFit" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
     <!-- Boxicons -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
     <title>{title}</title>
+
+    <!-- Structured Data: SoftwareApplication -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "AtheneaFit",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": description,
+      "url": siteUrl,
+      "image": ogImageUrl,
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Básico",
+          "price": "29",
+          "priceCurrency": "USD",
+          "description": "Perfecto para gimnasios que recién comienzan. Hasta 100 clientes.",
+          "url": `${siteUrl}/#pricing`
+        },
+        {
+          "@type": "Offer",
+          "name": "Profesional",
+          "price": "59",
+          "priceCurrency": "USD",
+          "description": "La opción más popular para gimnasios en crecimiento. Clientes ilimitados.",
+          "url": `${siteUrl}/#pricing`
+        },
+        {
+          "@type": "Offer",
+          "name": "Empresarial",
+          "price": "99",
+          "priceCurrency": "USD",
+          "description": "Para cadenas de gimnasios y operaciones grandes. Multi-gimnasio.",
+          "url": `${siteUrl}/#pricing`
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "3",
+        "bestRating": "5"
+      }
+    })} />
+
+    <!-- Structured Data: Organization -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "AtheneaFit",
+      "url": siteUrl,
+      "logo": ogImageUrl,
+      "description": "Software de gestión inteligente para gimnasios.",
+      "sameAs": []
+    })} />
   </head>
   <body>
     <slot />
