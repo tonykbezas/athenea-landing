@@ -14,6 +14,7 @@ const plans = [
     ],
     highlight: false,
     cta: 'Empezar Gratis',
+    setupFee: true,
   },
   {
     name: 'Profesional',
@@ -31,6 +32,7 @@ const plans = [
     ],
     highlight: true,
     cta: 'Comenzar Ahora',
+    setupFee: true,
   },
   {
     name: 'Empresarial',
@@ -48,6 +50,7 @@ const plans = [
     ],
     highlight: false,
     cta: 'Contactar Ventas',
+    setupFee: true,
   },
 ];
 ---
@@ -65,6 +68,57 @@ const plans = [
       </p>
     </div>
 
+    <!-- Founding Clients Banner -->
+    <div class="founders-banner">
+      <div class="founders-badge">
+        <i class='bx bx-crown'></i>
+        Clientes Fundadores
+      </div>
+      <div class="founders-content">
+        <div class="founders-title">
+          <span class="founders-spots">Solo 5 cupos disponibles</span>
+          <span class="founders-subtitle">Beneficios exclusivos para los primeros 5 gimnasios que se unan</span>
+        </div>
+        <div class="founders-benefits">
+          <div class="founder-benefit">
+            <i class='bx bx-check-circle'></i>
+            <div>
+              <strong>Configuración inicial $0</strong>
+              <span>Sin costo de onboarding</span>
+            </div>
+          </div>
+          <div class="founder-benefit">
+            <i class='bx bx-check-circle'></i>
+            <div>
+              <strong>Capacitación gratuita</strong>
+              <span>Sesión de entrenamiento incluida</span>
+            </div>
+          </div>
+          <div class="founder-benefit">
+            <i class='bx bx-check-circle'></i>
+            <div>
+              <strong>Plan Básico congelado</strong>
+              <span>Precio garantizado para siempre</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="founders-spots-indicator">
+        <div class="spots-label">Cupos restantes</div>
+        <div class="spots-dots">
+          <span class="dot available"></span>
+          <span class="dot available"></span>
+          <span class="dot available"></span>
+          <span class="dot available"></span>
+          <span class="dot available"></span>
+        </div>
+        <a href="#cta" class="btn btn-primary founders-cta">
+          <i class='bx bx-crown'></i>
+          Quiero ser Fundador
+        </a>
+      </div>
+    </div>
+
     <div class="pricing-grid grid grid-3">
       {plans.map((plan) => (
         <div class={`pricing-card card ${plan.highlight ? 'highlighted' : ''}`}>
@@ -75,6 +129,12 @@ const plans = [
             <span class="amount">{plan.price}</span>
             <span class="period">{plan.period}</span>
           </div>
+          {plan.setupFee && (
+            <div class="setup-fee-note">
+              <i class='bx bx-info-circle'></i>
+              Configuración inicial tiene costo adicional
+            </div>
+          )}
           <p class="plan-desc">{plan.description}</p>
 
           <ul class="plan-features">
@@ -205,5 +265,209 @@ const plans = [
     width: 100%;
     padding: 0.875rem;
     font-size: 0.9375rem;
+  }
+
+  /* Founders Banner */
+  .founders-banner {
+    background: linear-gradient(135deg, rgba(255, 200, 50, 0.07) 0%, rgba(255, 255, 255, 0.04) 100%);
+    border: 1px solid rgba(255, 200, 50, 0.25);
+    border-radius: var(--radius-xl);
+    padding: 2rem 2.5rem;
+    margin-bottom: 3rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 2rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .founders-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 200, 50, 0.5), transparent);
+  }
+
+  .founders-badge {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255, 200, 50, 0.12);
+    border: 1px solid rgba(255, 200, 50, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: #FFC832;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .founders-badge i {
+    font-size: 1.75rem;
+  }
+
+  .founders-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .founders-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .founders-spots {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  .founders-subtitle {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+  }
+
+  .founders-benefits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .founder-benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 160px;
+  }
+
+  .founder-benefit i {
+    color: #FFC832;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .founder-benefit div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .founder-benefit strong {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  .founder-benefit span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .founders-spots-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 160px;
+  }
+
+  .spots-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .spots-dots {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 200, 50, 0.25);
+    border: 1px solid rgba(255, 200, 50, 0.4);
+  }
+
+  .dot.available {
+    background: #FFC832;
+    box-shadow: 0 0 8px rgba(255, 200, 50, 0.5);
+  }
+
+  .founders-cta {
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+    background: #FFC832;
+    border-color: #FFC832;
+    color: #1a1a1a;
+    font-weight: 700;
+  }
+
+  .founders-cta:hover {
+    background: #FFD44D;
+    border-color: #FFD44D;
+    color: #1a1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(255, 200, 50, 0.3);
+  }
+
+  .setup-fee-note {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+    padding: 0.4rem 0.75rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+  }
+
+  .setup-fee-note i {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .founders-banner {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .founders-badge {
+      flex-direction: row;
+      align-self: center;
+    }
+
+    .founders-benefits {
+      justify-content: center;
+    }
+
+    .founders-spots-indicator {
+      align-self: center;
+    }
+
+    .founders-cta {
+      width: auto;
+      padding: 0.75rem 2rem;
+    }
   }
 </style>

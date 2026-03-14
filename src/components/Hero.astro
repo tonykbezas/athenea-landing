@@ -35,15 +35,10 @@
       </div>
 
       <div class="hero-trust">
-        <div class="trust-avatars">
-          <div class="trust-avatar" style="background: #2A2D33;">🏋️</div>
-          <div class="trust-avatar" style="background: #383C42;">💪</div>
-          <div class="trust-avatar" style="background: #2A2D33;">🏅</div>
-          <div class="trust-avatar" style="background: #383C42;">🎯</div>
+        <div class="launch-badge">
+          <i class='bx bx-rocket'></i>
+          <span><strong>Fase de lanzamiento inicial</strong> — Aprovecha descuentos exclusivos por tiempo limitado</span>
         </div>
-        <p class="trust-text">
-          <strong>+150 gimnasios</strong> ya confían en AtheneaFit
-        </p>
       </div>
     </div>
 
@@ -194,7 +189,25 @@
     color: var(--text-muted);
   }
 
-  .trust-text strong {
+  .launch-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 100px;
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+  }
+
+  .launch-badge i {
+    color: var(--text-primary);
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .launch-badge strong {
     color: var(--text-primary);
   }
 
