@@ -6,13 +6,15 @@ const plans = [
     period: '/mes',
     description: 'Perfecto para gimnasios que recién comienzan.',
     features: [
-      'Hasta 100 clientes',
+      'Hasta 150 clientes',
       'Gestión de suscripciones',
       'Dashboard básico',
+      'Notificaciones automáticas por email',
       'Soporte por email',
-      '1 usuario administrador',
+      '3 cuentas: 1 administrador + 2 entrenadores',
     ],
     highlight: false,
+    comingSoon: false,
     cta: 'Empezar Gratis',
   },
   {
@@ -24,13 +26,17 @@ const plans = [
       'Clientes ilimitados',
       'Gestión completa de pagos',
       'Dashboard avanzado con gráficos',
-      'Notificaciones automatizadas',
+      'Notificaciones por email y WhatsApp',
+      'Conciliación bancaria',
+      'Cuentas para clientes',
+      'Cuentas para entrenadores',
       'Control de gastos',
       'Hasta 5 usuarios',
       'Soporte prioritario',
     ],
     highlight: true,
-    cta: 'Comenzar Ahora',
+    comingSoon: true,
+    cta: 'Próximamente',
   },
   {
     name: 'Empresarial',
@@ -47,7 +53,8 @@ const plans = [
       'Soporte dedicado 24/7',
     ],
     highlight: false,
-    cta: 'Contactar Ventas',
+    comingSoon: true,
+    cta: 'Próximamente',
   },
 ];
 ---
@@ -67,8 +74,9 @@ const plans = [
 
     <div class="pricing-grid grid grid-3">
       {plans.map((plan) => (
-        <div class={`pricing-card card ${plan.highlight ? 'highlighted' : ''}`}>
-          {plan.highlight && <div class="popular-badge">⭐ Más Popular</div>}
+        <div class={`pricing-card card ${plan.highlight ? 'highlighted' : ''} ${plan.comingSoon ? 'coming-soon-card' : ''}`}>
+          {plan.highlight && !plan.comingSoon && <div class="popular-badge">⭐ Más Popular</div>}
+          {plan.comingSoon && <div class="coming-soon-badge">🚀 Próximamente</div>}
           <div class="plan-name">{plan.name}</div>
           <div class="plan-price">
             <span class="currency">$</span>
@@ -86,9 +94,15 @@ const plans = [
             ))}
           </ul>
 
-          <a href="#cta" class={`btn ${plan.highlight ? 'btn-primary' : 'btn-secondary'} btn-plan`}>
-            {plan.cta}
-          </a>
+          {plan.comingSoon ? (
+            <button disabled class={`btn ${plan.highlight ? 'btn-primary' : 'btn-secondary'} btn-plan btn-disabled`}>
+              {plan.cta}
+            </button>
+          ) : (
+            <a href="#cta" class={`btn ${plan.highlight ? 'btn-primary' : 'btn-secondary'} btn-plan`}>
+              {plan.cta}
+            </a>
+          )}
         </div>
       ))}
     </div>
@@ -205,5 +219,31 @@ const plans = [
     width: 100%;
     padding: 0.875rem;
     font-size: 0.9375rem;
+  }
+
+  .coming-soon-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.3rem 1rem;
+    border-radius: 100px;
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+  }
+
+  .coming-soon-card {
+    opacity: 0.72;
+    filter: saturate(0.6);
+  }
+
+  .btn-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    pointer-events: none;
   }
 </style>
