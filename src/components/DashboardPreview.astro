@@ -14,6 +14,22 @@
       </p>
     </div>
 
+    <!-- Tab Pills -->
+    <div class="view-tabs">
+      <button class="view-tab active" data-tab="0">
+        <i class='bx bx-grid-alt'></i> Dashboard
+      </button>
+      <button class="view-tab" data-tab="1">
+        <i class='bx bx-group'></i> Clientes
+      </button>
+      <button class="view-tab" data-tab="2">
+        <i class='bx bx-calendar'></i> Suscripciones
+      </button>
+      <button class="view-tab" data-tab="3">
+        <i class='bx bx-bell'></i> Notificaciones
+      </button>
+    </div>
+
     <div class="dashboard-showcase">
       <div class="browser-chrome">
         <div class="chrome-topbar">
@@ -24,7 +40,7 @@
           </div>
           <div class="chrome-address">
             <i class='bx bx-lock-alt'></i>
-            <span>app.atheneafit.com/dashboard</span>
+            <span id="chrome-url">app.atheneafit.com/dashboard</span>
           </div>
           <div class="chrome-actions">
             <i class='bx bx-minus'></i>
@@ -33,121 +49,496 @@
           </div>
         </div>
 
-        <div class="dashboard-body">
-          <!-- Sidebar -->
-          <div class="dash-sidebar">
-            <div class="sb-logo">
-              <div class="sb-logo-icon">A</div>
-              <span class="sb-logo-text">AtheneaFit</span>
-            </div>
-            <div class="sb-nav">
-              <div class="sb-item active"><i class='bx bx-grid-alt'></i><span>Dashboard</span></div>
-              <div class="sb-item"><i class='bx bx-group'></i><span>Clientes</span></div>
-              <div class="sb-item"><i class='bx bx-calendar'></i><span>Suscripciones</span></div>
-              <div class="sb-item"><i class='bx bx-credit-card'></i><span>Pagos</span></div>
-              <div class="sb-item"><i class='bx bx-trending-down'></i><span>Gastos</span></div>
-              <div class="sb-item"><i class='bx bx-bell'></i><span>Notificaciones</span></div>
-              <div class="sb-item"><i class='bx bx-cog'></i><span>Configuración</span></div>
+        <!-- Slides wrapper -->
+        <div class="slides-wrapper">
+
+          <!-- SLIDE 0: Dashboard -->
+          <div class="slide active" data-slide="0">
+            <div class="dashboard-body">
+              <!-- Sidebar -->
+              <div class="dash-sidebar">
+                <div class="sb-logo">
+                  <div class="sb-logo-icon">A</div>
+                  <span class="sb-logo-text">AtheneaFit</span>
+                </div>
+                <div class="sb-nav">
+                  <div class="sb-item active"><i class='bx bx-grid-alt'></i><span>Dashboard</span></div>
+                  <div class="sb-item"><i class='bx bx-group'></i><span>Clientes</span></div>
+                  <div class="sb-item"><i class='bx bx-calendar'></i><span>Suscripciones</span></div>
+                  <div class="sb-item"><i class='bx bx-credit-card'></i><span>Pagos</span></div>
+                  <div class="sb-item"><i class='bx bx-trending-down'></i><span>Gastos</span></div>
+                  <div class="sb-item"><i class='bx bx-bell'></i><span>Notificaciones</span></div>
+                  <div class="sb-item"><i class='bx bx-cog'></i><span>Configuración</span></div>
+                </div>
+              </div>
+
+              <!-- Main content -->
+              <div class="dash-main">
+                <!-- Quick action buttons -->
+                <div class="dash-quick-actions">
+                  <div class="qa-btn warning"><i class='bx bx-id-card'></i>Cobrar</div>
+                  <div class="qa-btn primary"><i class='bx bx-calendar-plus'></i>Suscripción</div>
+                  <div class="qa-btn success"><i class='bx bx-user-plus'></i>Cliente</div>
+                  <div class="qa-btn info"><i class='bx bx-cart'></i>Venta Rápida</div>
+                </div>
+
+                <!-- Metric cards row -->
+                <div class="dash-metrics">
+                  <div class="metric-card-mock">
+                    <div class="mc-icon green"><i class='bx bx-check-circle'></i></div>
+                    <div class="mc-label">Activas</div>
+                    <div class="mc-value">156</div>
+                    <div class="mc-trend green-text">+12%</div>
+                  </div>
+                  <div class="metric-card-mock">
+                    <div class="mc-icon red"><i class='bx bx-x-circle'></i></div>
+                    <div class="mc-label">Vencidas</div>
+                    <div class="mc-value">23</div>
+                    <div class="mc-trend red-text">-5%</div>
+                  </div>
+                  <div class="metric-card-mock">
+                    <div class="mc-icon orange"><i class='bx bx-time-five'></i></div>
+                    <div class="mc-label">Gracia</div>
+                    <div class="mc-value">8</div>
+                    <div class="mc-trend orange-text">Atención</div>
+                  </div>
+                  <div class="metric-card-mock">
+                    <div class="mc-icon blue"><i class='bx bx-group'></i></div>
+                    <div class="mc-label">Miembros</div>
+                    <div class="mc-value">312</div>
+                    <div class="mc-trend blue-text">+18</div>
+                  </div>
+                </div>
+
+                <!-- Chart area -->
+                <div class="dash-chart-area">
+                  <div class="chart-card">
+                    <div class="chart-header">
+                      <h4>Ingresos vs Gastos</h4>
+                      <span class="chart-badge">6 meses</span>
+                    </div>
+                    <svg class="chart-full" viewBox="0 0 500 140">
+                      <defs>
+                        <linearGradient id="incomeGrad" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stop-color="#22c55e" stop-opacity="0.25"/>
+                          <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+                        </linearGradient>
+                        <linearGradient id="expenseGrad" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stop-color="#ef4444" stop-opacity="0.15"/>
+                          <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
+                        </linearGradient>
+                      </defs>
+                      <!-- Income line -->
+                      <path d="M0,100 Q50,85 100,75 T200,50 T300,55 T400,35 T500,25" fill="none" stroke="#22c55e" stroke-width="2.5"/>
+                      <path d="M0,100 Q50,85 100,75 T200,50 T300,55 T400,35 T500,25 V140 H0 Z" fill="url(#incomeGrad)"/>
+                      <!-- Expense line -->
+                      <path d="M0,110 Q50,105 100,108 T200,95 T300,100 T400,90 T500,85" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,3"/>
+                      <path d="M0,110 Q50,105 100,108 T200,95 T300,100 T400,90 T500,85 V140 H0 Z" fill="url(#expenseGrad)"/>
+                    </svg>
+                  </div>
+                  <div class="summary-card">
+                    <div class="summary-row">
+                      <div class="sum-icon green"><i class='bx bx-trending-up'></i></div>
+                      <div>
+                        <div class="sum-label">Ingresos</div>
+                        <div class="sum-value">$42,850</div>
+                      </div>
+                      <span class="sum-change green-text">+14%</span>
+                    </div>
+                    <div class="summary-row">
+                      <div class="sum-icon red"><i class='bx bx-trending-down'></i></div>
+                      <div>
+                        <div class="sum-label">Gastos</div>
+                        <div class="sum-value">$18,230</div>
+                      </div>
+                      <span class="sum-change red-text">+3%</span>
+                    </div>
+                    <hr />
+                    <div class="summary-row">
+                      <div class="sum-icon blue"><i class='bx bx-wallet'></i></div>
+                      <div>
+                        <div class="sum-label">Beneficio Neto</div>
+                        <div class="sum-value profit">$24,620</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Main content -->
-          <div class="dash-main">
-            <!-- Quick action buttons -->
-            <div class="dash-quick-actions">
-              <div class="qa-btn warning"><i class='bx bx-id-card'></i>Cobrar</div>
-              <div class="qa-btn primary"><i class='bx bx-calendar-plus'></i>Suscripción</div>
-              <div class="qa-btn success"><i class='bx bx-user-plus'></i>Cliente</div>
-              <div class="qa-btn info"><i class='bx bx-cart'></i>Venta Rápida</div>
-            </div>
+          <!-- SLIDE 1: Clientes -->
+          <div class="slide" data-slide="1">
+            <div class="dashboard-body">
+              <!-- Sidebar -->
+              <div class="dash-sidebar">
+                <div class="sb-logo">
+                  <div class="sb-logo-icon">A</div>
+                  <span class="sb-logo-text">AtheneaFit</span>
+                </div>
+                <div class="sb-nav">
+                  <div class="sb-item"><i class='bx bx-grid-alt'></i><span>Dashboard</span></div>
+                  <div class="sb-item active"><i class='bx bx-group'></i><span>Clientes</span></div>
+                  <div class="sb-item"><i class='bx bx-calendar'></i><span>Suscripciones</span></div>
+                  <div class="sb-item"><i class='bx bx-credit-card'></i><span>Pagos</span></div>
+                  <div class="sb-item"><i class='bx bx-trending-down'></i><span>Gastos</span></div>
+                  <div class="sb-item"><i class='bx bx-bell'></i><span>Notificaciones</span></div>
+                  <div class="sb-item"><i class='bx bx-cog'></i><span>Configuración</span></div>
+                </div>
+              </div>
 
-            <!-- Metric cards row -->
-            <div class="dash-metrics">
-              <div class="metric-card-mock">
-                <div class="mc-icon green"><i class='bx bx-check-circle'></i></div>
-                <div class="mc-label">Activas</div>
-                <div class="mc-value">156</div>
-                <div class="mc-trend green-text">+12%</div>
-              </div>
-              <div class="metric-card-mock">
-                <div class="mc-icon red"><i class='bx bx-x-circle'></i></div>
-                <div class="mc-label">Vencidas</div>
-                <div class="mc-value">23</div>
-                <div class="mc-trend red-text">-5%</div>
-              </div>
-              <div class="metric-card-mock">
-                <div class="mc-icon orange"><i class='bx bx-time-five'></i></div>
-                <div class="mc-label">Gracia</div>
-                <div class="mc-value">8</div>
-                <div class="mc-trend orange-text">Atención</div>
-              </div>
-              <div class="metric-card-mock">
-                <div class="mc-icon blue"><i class='bx bx-group'></i></div>
-                <div class="mc-label">Miembros</div>
-                <div class="mc-value">312</div>
-                <div class="mc-trend blue-text">+18</div>
-              </div>
-            </div>
+              <!-- Clients main content -->
+              <div class="dash-main">
+                <div class="list-page-header">
+                  <div>
+                    <div class="list-page-title">Clientes</div>
+                    <div class="list-page-sub">312 miembros registrados</div>
+                  </div>
+                  <div class="list-actions">
+                    <div class="list-search"><i class='bx bx-search'></i><span>Buscar cliente...</span></div>
+                    <div class="qa-btn success compact"><i class='bx bx-user-plus'></i>Nuevo</div>
+                  </div>
+                </div>
 
-            <!-- Chart area -->
-            <div class="dash-chart-area">
-              <div class="chart-card">
-                <div class="chart-header">
-                  <h4>Ingresos vs Gastos</h4>
-                  <span class="chart-badge">6 meses</span>
+                <!-- Stats row -->
+                <div class="list-stats">
+                  <div class="lstat green"><i class='bx bx-check-circle'></i><span class="lstat-val">289</span><span class="lstat-lbl">Activos</span></div>
+                  <div class="lstat red"><i class='bx bx-user-x'></i><span class="lstat-val">23</span><span class="lstat-lbl">Inactivos</span></div>
+                  <div class="lstat blue"><i class='bx bx-user-plus'></i><span class="lstat-val">18</span><span class="lstat-lbl">Nuevos (mes)</span></div>
+                  <div class="lstat orange"><i class='bx bx-time'></i><span class="lstat-val">8</span><span class="lstat-lbl">En Gracia</span></div>
                 </div>
-                <svg class="chart-full" viewBox="0 0 500 140">
-                  <defs>
-                    <linearGradient id="incomeGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="#22c55e" stop-opacity="0.25"/>
-                      <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
-                    </linearGradient>
-                    <linearGradient id="expenseGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="#ef4444" stop-opacity="0.15"/>
-                      <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
-                    </linearGradient>
-                  </defs>
-                  <!-- Income line -->
-                  <path d="M0,100 Q50,85 100,75 T200,50 T300,55 T400,35 T500,25" fill="none" stroke="#22c55e" stroke-width="2.5"/>
-                  <path d="M0,100 Q50,85 100,75 T200,50 T300,55 T400,35 T500,25 V140 H0 Z" fill="url(#incomeGrad)"/>
-                  <!-- Expense line -->
-                  <path d="M0,110 Q50,105 100,108 T200,95 T300,100 T400,90 T500,85" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,3"/>
-                  <path d="M0,110 Q50,105 100,108 T200,95 T300,100 T400,90 T500,85 V140 H0 Z" fill="url(#expenseGrad)"/>
-                </svg>
-              </div>
-              <div class="summary-card">
-                <div class="summary-row">
-                  <div class="sum-icon green"><i class='bx bx-trending-up'></i></div>
-                  <div>
-                    <div class="sum-label">Ingresos</div>
-                    <div class="sum-value">$42,850</div>
+
+                <!-- Clients table -->
+                <div class="mock-table">
+                  <div class="table-header">
+                    <span>Cliente</span>
+                    <span>Teléfono</span>
+                    <span>Suscripción</span>
+                    <span>Estado</span>
                   </div>
-                  <span class="sum-change green-text">+14%</span>
-                </div>
-                <div class="summary-row">
-                  <div class="sum-icon red"><i class='bx bx-trending-down'></i></div>
-                  <div>
-                    <div class="sum-label">Gastos</div>
-                    <div class="sum-value">$18,230</div>
+                  <div class="table-row">
+                    <div class="client-cell">
+                      <div class="avatar av-purple">CM</div>
+                      <div><div class="client-name">Carlos Martínez</div><div class="client-email">carlos@email.com</div></div>
+                    </div>
+                    <span class="cell-muted">+1 555-0142</span>
+                    <span class="cell-muted">Mensual</span>
+                    <span class="badge green-badge">Activo</span>
                   </div>
-                  <span class="sum-change red-text">+3%</span>
-                </div>
-                <hr />
-                <div class="summary-row">
-                  <div class="sum-icon blue"><i class='bx bx-wallet'></i></div>
-                  <div>
-                    <div class="sum-label">Beneficio Neto</div>
-                    <div class="sum-value profit">$24,620</div>
+                  <div class="table-row">
+                    <div class="client-cell">
+                      <div class="avatar av-pink">LR</div>
+                      <div><div class="client-name">Laura Rodríguez</div><div class="client-email">laura@email.com</div></div>
+                    </div>
+                    <span class="cell-muted">+1 555-0198</span>
+                    <span class="cell-muted">Trimestral</span>
+                    <span class="badge green-badge">Activo</span>
+                  </div>
+                  <div class="table-row">
+                    <div class="client-cell">
+                      <div class="avatar av-blue">JH</div>
+                      <div><div class="client-name">Juan Hernández</div><div class="client-email">juan@email.com</div></div>
+                    </div>
+                    <span class="cell-muted">+1 555-0207</span>
+                    <span class="cell-muted">Mensual</span>
+                    <span class="badge orange-badge">Gracia</span>
+                  </div>
+                  <div class="table-row">
+                    <div class="client-cell">
+                      <div class="avatar av-teal">MG</div>
+                      <div><div class="client-name">María González</div><div class="client-email">maria@email.com</div></div>
+                    </div>
+                    <span class="cell-muted">+1 555-0315</span>
+                    <span class="cell-muted">Anual</span>
+                    <span class="badge green-badge">Activo</span>
+                  </div>
+                  <div class="table-row">
+                    <div class="client-cell">
+                      <div class="avatar av-red">AP</div>
+                      <div><div class="client-name">Andrés Pérez</div><div class="client-email">andres@email.com</div></div>
+                    </div>
+                    <span class="cell-muted">+1 555-0421</span>
+                    <span class="cell-muted">Mensual</span>
+                    <span class="badge red-badge">Vencido</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+
+          <!-- SLIDE 2: Suscripciones -->
+          <div class="slide" data-slide="2">
+            <div class="dashboard-body">
+              <!-- Sidebar -->
+              <div class="dash-sidebar">
+                <div class="sb-logo">
+                  <div class="sb-logo-icon">A</div>
+                  <span class="sb-logo-text">AtheneaFit</span>
+                </div>
+                <div class="sb-nav">
+                  <div class="sb-item"><i class='bx bx-grid-alt'></i><span>Dashboard</span></div>
+                  <div class="sb-item"><i class='bx bx-group'></i><span>Clientes</span></div>
+                  <div class="sb-item active"><i class='bx bx-calendar'></i><span>Suscripciones</span></div>
+                  <div class="sb-item"><i class='bx bx-credit-card'></i><span>Pagos</span></div>
+                  <div class="sb-item"><i class='bx bx-trending-down'></i><span>Gastos</span></div>
+                  <div class="sb-item"><i class='bx bx-bell'></i><span>Notificaciones</span></div>
+                  <div class="sb-item"><i class='bx bx-cog'></i><span>Configuración</span></div>
+                </div>
+              </div>
+
+              <!-- Subscriptions main content -->
+              <div class="dash-main">
+                <div class="list-page-header">
+                  <div>
+                    <div class="list-page-title">Suscripciones</div>
+                    <div class="list-page-sub">187 suscripciones activas</div>
+                  </div>
+                  <div class="list-actions">
+                    <div class="list-search"><i class='bx bx-search'></i><span>Buscar...</span></div>
+                    <div class="qa-btn primary compact"><i class='bx bx-calendar-plus'></i>Nueva</div>
+                  </div>
+                </div>
+
+                <!-- Stats row -->
+                <div class="list-stats">
+                  <div class="lstat green"><i class='bx bx-check-circle'></i><span class="lstat-val">156</span><span class="lstat-lbl">Activas</span></div>
+                  <div class="lstat orange"><i class='bx bx-time-five'></i><span class="lstat-val">31</span><span class="lstat-lbl">Por vencer</span></div>
+                  <div class="lstat red"><i class='bx bx-x-circle'></i><span class="lstat-val">23</span><span class="lstat-lbl">Vencidas</span></div>
+                  <div class="lstat blue"><i class='bx bx-dollar'></i><span class="lstat-val">$8,450</span><span class="lstat-lbl">Recaudado</span></div>
+                </div>
+
+                <!-- Subs table -->
+                <div class="mock-table">
+                  <div class="table-header">
+                    <span>Cliente</span>
+                    <span>Plan</span>
+                    <span>Vence</span>
+                    <span>Estado</span>
+                  </div>
+                  <div class="table-row">
+                    <div class="client-cell">
+                      <div class="avatar av-purple">CM</div>
+                      <div><div class="client-name">Carlos Martínez</div><div class="client-email">Mensual · $45</div></div>
+                    </div>
+                    <span class="plan-pill pill-monthly">Mensual</span>
+                    <span class="cell-muted">30 abr 2026</span>
+                    <span class="badge green-badge">Activa</span>
+                  </div>
+                  <div class="table-row">
+                    <div class="client-cell">
+                      <div class="avatar av-pink">LR</div>
+                      <div><div class="client-name">Laura Rodríguez</div><div class="client-email">Trimestral · $120</div></div>
+                    </div>
+                    <span class="plan-pill pill-quarterly">Trim.</span>
+                    <span class="cell-muted">15 jun 2026</span>
+                    <span class="badge green-badge">Activa</span>
+                  </div>
+                  <div class="table-row">
+                    <div class="client-cell">
+                      <div class="avatar av-blue">JH</div>
+                      <div><div class="client-name">Juan Hernández</div><div class="client-email">Mensual · $45</div></div>
+                    </div>
+                    <span class="plan-pill pill-monthly">Mensual</span>
+                    <span class="cell-muted">05 abr 2026</span>
+                    <span class="badge orange-badge">Gracia</span>
+                  </div>
+                  <div class="table-row">
+                    <div class="client-cell">
+                      <div class="avatar av-teal">MG</div>
+                      <div><div class="client-name">María González</div><div class="client-email">Anual · $420</div></div>
+                    </div>
+                    <span class="plan-pill pill-annual">Anual</span>
+                    <span class="cell-muted">01 ene 2027</span>
+                    <span class="badge green-badge">Activa</span>
+                  </div>
+                  <div class="table-row">
+                    <div class="client-cell">
+                      <div class="avatar av-red">AP</div>
+                      <div><div class="client-name">Andrés Pérez</div><div class="client-email">Mensual · $45</div></div>
+                    </div>
+                    <span class="plan-pill pill-monthly">Mensual</span>
+                    <span class="cell-muted">28 mar 2026</span>
+                    <span class="badge red-badge">Vencida</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SLIDE 3: Notificaciones -->
+          <div class="slide" data-slide="3">
+            <div class="dashboard-body">
+              <!-- Sidebar -->
+              <div class="dash-sidebar">
+                <div class="sb-logo">
+                  <div class="sb-logo-icon">A</div>
+                  <span class="sb-logo-text">AtheneaFit</span>
+                </div>
+                <div class="sb-nav">
+                  <div class="sb-item"><i class='bx bx-grid-alt'></i><span>Dashboard</span></div>
+                  <div class="sb-item"><i class='bx bx-group'></i><span>Clientes</span></div>
+                  <div class="sb-item"><i class='bx bx-calendar'></i><span>Suscripciones</span></div>
+                  <div class="sb-item"><i class='bx bx-credit-card'></i><span>Pagos</span></div>
+                  <div class="sb-item"><i class='bx bx-trending-down'></i><span>Gastos</span></div>
+                  <div class="sb-item active"><i class='bx bx-bell'></i><span>Notificaciones</span></div>
+                  <div class="sb-item"><i class='bx bx-cog'></i><span>Configuración</span></div>
+                </div>
+              </div>
+
+              <!-- Notifications main content -->
+              <div class="dash-main">
+                <div class="list-page-header">
+                  <div>
+                    <div class="list-page-title">Notificaciones Enviadas</div>
+                    <div class="list-page-sub">Registro de alertas automáticas del día de hoy</div>
+                  </div>
+                  <div class="list-actions">
+                    <div class="notif-filter-group">
+                      <button class="notif-filter active">Todas</button>
+                      <button class="notif-filter"><i class='bx bx-cake'></i> Cumpleaños</button>
+                      <button class="notif-filter"><i class='bx bx-time-five'></i> Vencimiento</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Stats strip -->
+                <div class="list-stats">
+                  <div class="lstat purple"><i class='bx bx-send'></i><span class="lstat-val">47</span><span class="lstat-lbl">Total enviadas</span></div>
+                  <div class="lstat pink"><i class='bx bx-cake'></i><span class="lstat-val">12</span><span class="lstat-lbl">Cumpleaños</span></div>
+                  <div class="lstat orange"><i class='bx bx-time-five'></i><span class="lstat-val">31</span><span class="lstat-lbl">Vencimientos</span></div>
+                  <div class="lstat green"><i class='bx bx-check-double'></i><span class="lstat-val">97%</span><span class="lstat-lbl">Entregadas</span></div>
+                </div>
+
+                <!-- Notifications table -->
+                <div class="mock-table">
+                  <div class="table-header notif-cols">
+                    <span>Cliente</span>
+                    <span>Tipo</span>
+                    <span>Canal</span>
+                    <span>Estado</span>
+                  </div>
+
+                  <div class="table-row notif-cols">
+                    <div class="client-cell">
+                      <div class="avatar av-pink">LR</div>
+                      <div><div class="client-name">Laura Rodríguez</div><div class="client-email">Hace 10 min</div></div>
+                    </div>
+                    <div class="notif-type birthday"><i class='bx bx-cake'></i> Cumpleaños</div>
+                    <div class="notif-channel"><i class='bx bxl-whatsapp'></i><span>WhatsApp</span></div>
+                    <span class="badge green-badge">Entregada</span>
+                  </div>
+
+                  <div class="table-row notif-cols">
+                    <div class="client-cell">
+                      <div class="avatar av-blue">JH</div>
+                      <div><div class="client-name">Juan Hernández</div><div class="client-email">Hace 25 min</div></div>
+                    </div>
+                    <div class="notif-type expiry"><i class='bx bx-time-five'></i> Vencimiento</div>
+                    <div class="notif-channel"><i class='bx bxl-whatsapp'></i><span>WhatsApp</span></div>
+                    <span class="badge orange-badge">Pendiente</span>
+                  </div>
+
+                  <div class="table-row notif-cols">
+                    <div class="client-cell">
+                      <div class="avatar av-teal">MG</div>
+                      <div><div class="client-name">María González</div><div class="client-email">Hace 1 hora</div></div>
+                    </div>
+                    <div class="notif-type expiry"><i class='bx bx-time-five'></i> Vencimiento</div>
+                    <div class="notif-channel"><i class='bx bx-envelope'></i><span>Email</span></div>
+                    <span class="badge green-badge">Entregada</span>
+                  </div>
+
+                  <div class="table-row notif-cols">
+                    <div class="client-cell">
+                      <div class="avatar av-purple">CM</div>
+                      <div><div class="client-name">Carlos Martínez</div><div class="client-email">Hace 2 horas</div></div>
+                    </div>
+                    <div class="notif-type birthday"><i class='bx bx-cake'></i> Cumpleaños</div>
+                    <div class="notif-channel"><i class='bx bxl-whatsapp'></i><span>WhatsApp</span></div>
+                    <span class="badge green-badge">Entregada</span>
+                  </div>
+
+                  <div class="table-row notif-cols">
+                    <div class="client-cell">
+                      <div class="avatar av-red">AP</div>
+                      <div><div class="client-name">Andrés Pérez</div><div class="client-email">Hace 3 horas</div></div>
+                    </div>
+                    <div class="notif-type expiry"><i class='bx bx-time-five'></i> Vencimiento</div>
+                    <div class="notif-channel"><i class='bx bx-envelope'></i><span>Email</span></div>
+                    <span class="badge red-badge">Fallida</span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end slides-wrapper -->
+      </div><!-- end browser-chrome -->
+
+      <!-- Progress dots -->
+      <div class="slide-dots">
+        <span class="slide-dot active" data-dot="0"></span>
+        <span class="slide-dot" data-dot="1"></span>
+        <span class="slide-dot" data-dot="2"></span>
+        <span class="slide-dot" data-dot="3"></span>
       </div>
+
     </div>
   </div>
 </section>
+
+<script>
+  const URLS = [
+    'app.atheneafit.com/dashboard',
+    'app.atheneafit.com/clientes',
+    'app.atheneafit.com/suscripciones',
+    'app.atheneafit.com/notificaciones',
+  ];
+
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.slide-dot');
+  const tabs = document.querySelectorAll('.view-tab');
+  const urlEl = document.getElementById('chrome-url');
+  let current = 0;
+  let timer: ReturnType<typeof setInterval>;
+
+  function goTo(idx: number) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    tabs[current].classList.remove('active');
+    current = idx;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    tabs[current].classList.add('active');
+    if (urlEl) urlEl.textContent = URLS[current];
+  }
+
+  function startAuto() {
+    timer = setInterval(() => goTo((current + 1) % slides.length), 4000);
+  }
+
+  function resetAuto() {
+    clearInterval(timer);
+    startAuto();
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      goTo(parseInt(tab.getAttribute('data-tab') || '0'));
+      resetAuto();
+    });
+  });
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      goTo(parseInt(dot.getAttribute('data-dot') || '0'));
+      resetAuto();
+    });
+  });
+
+  startAuto();
+</script>
 
 <style>
   .dashboard-section {
@@ -158,11 +549,48 @@
 
   .dashboard-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
   .dashboard-header .section-subtitle {
     margin: 0 auto;
+  }
+
+  /* View tab pills */
+  .view-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .view-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 1.1rem;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: inherit;
+  }
+
+  .view-tab i { font-size: 1rem; }
+
+  .view-tab:hover {
+    background: rgba(255,255,255,0.05);
+    color: var(--text-primary);
+  }
+
+  .view-tab.active {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border-color: var(--text-primary);
   }
 
   /* Browser chrome */
@@ -212,6 +640,49 @@
     gap: 0.75rem;
     color: var(--text-muted);
     font-size: 0.875rem;
+  }
+
+  /* Slides */
+  .slides-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide {
+    display: none;
+    animation: fadeSlide 0.45s ease;
+  }
+
+  .slide.active {
+    display: block;
+  }
+
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Progress dots */
+  .slide-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+  }
+
+  .slide-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .slide-dot.active {
+    background: var(--text-primary);
+    width: 24px;
+    border-radius: 4px;
   }
 
   /* Dashboard body */
@@ -305,7 +776,10 @@
     justify-content: center;
     gap: 0.3rem;
     color: white;
+    cursor: pointer;
   }
+
+  .qa-btn.compact { padding: 0.4rem 0.75rem; font-size: 0.6rem; }
 
   .qa-btn i { font-size: 0.85rem; }
 
@@ -421,11 +895,242 @@
     margin: 0.25rem 0;
   }
 
+  /* ── List pages (Clientes / Suscripciones) ── */
+  .list-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .list-page-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .list-page-sub {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+  }
+
+  .list-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .list-search {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.3rem 0.6rem;
+    font-size: 0.62rem;
+    color: var(--text-muted);
+  }
+
+  .list-search i { font-size: 0.8rem; }
+
+  /* Stats strip */
+  .list-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .lstat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.5rem;
+  }
+
+  .lstat i { font-size: 1rem; }
+  .lstat.green i { color: var(--accent-success); }
+  .lstat.red i   { color: var(--accent-danger); }
+  .lstat.blue i  { color: var(--accent-info); }
+  .lstat.orange i{ color: var(--accent-warning); }
+
+  .lstat-val  { font-size: 0.85rem; font-weight: 800; color: var(--text-primary); }
+  .lstat-lbl  { font-size: 0.55rem; color: var(--text-muted); text-align: center; }
+
+  /* Table */
+  .mock-table {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    font-size: 0.65rem;
+  }
+
+  .table-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 0.8fr;
+    padding: 0.4rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+    font-weight: 600;
+    background: var(--bg-secondary);
+  }
+
+  .table-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 0.8fr;
+    align-items: center;
+    padding: 0.45rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  .table-row:last-child { border-bottom: none; }
+  .table-row:hover { background: rgba(255,255,255,0.03); }
+
+  .client-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.55rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    color: white;
+  }
+
+  .av-purple { background: #7c3aed; }
+  .av-pink   { background: #db2777; }
+  .av-blue   { background: #2563eb; }
+  .av-teal   { background: #0d9488; }
+  .av-red    { background: #dc2626; }
+
+  .client-name  { font-weight: 600; color: var(--text-primary); font-size: 0.65rem; }
+  .client-email { font-size: 0.55rem; color: var(--text-muted); }
+  .cell-muted   { color: var(--text-muted); }
+
+  .badge {
+    display: inline-flex;
+    padding: 0.15rem 0.45rem;
+    border-radius: 100px;
+    font-size: 0.55rem;
+    font-weight: 600;
+    width: fit-content;
+  }
+
+  .green-badge  { background: var(--accent-success-dim); color: var(--accent-success); }
+  .red-badge    { background: var(--accent-danger-dim);  color: var(--accent-danger); }
+  .orange-badge { background: var(--accent-warning-dim); color: var(--accent-warning); }
+
+  /* Plan pills */
+  .plan-pill {
+    display: inline-flex;
+    padding: 0.15rem 0.45rem;
+    border-radius: 100px;
+    font-size: 0.55rem;
+    font-weight: 600;
+    width: fit-content;
+  }
+
+  .pill-monthly  { background: rgba(37,99,235,0.15); color: #60a5fa; }
+  .pill-quarterly{ background: rgba(124,58,237,0.15); color: #a78bfa; }
+  .pill-annual   { background: rgba(13,148,136,0.15); color: #34d399; }
+
+  /* ── Notifications slide ── */
+  .lstat.purple i { color: #a78bfa; }
+  .lstat.pink i   { color: #f472b6; }
+
+  .notif-cols {
+    grid-template-columns: 2fr 1.2fr 1fr 0.8fr;
+  }
+
+  .notif-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.6rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 100px;
+    width: fit-content;
+  }
+
+  .notif-type.birthday {
+    background: rgba(244,114,182,0.15);
+    color: #f472b6;
+  }
+
+  .notif-type.expiry {
+    background: rgba(251,146,60,0.15);
+    color: #fb923c;
+  }
+
+  .notif-channel {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.6rem;
+    color: var(--text-muted);
+  }
+
+  .notif-channel i { font-size: 0.9rem; }
+  .notif-channel .bxl-whatsapp { color: #25d366; }
+  .notif-channel .bx-envelope   { color: #60a5fa; }
+
+  /* Filter pills (decorative inside slide) */
+  .notif-filter-group {
+    display: flex;
+    gap: 0.3rem;
+  }
+
+  .notif-filter {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.58rem;
+    font-weight: 500;
+    cursor: default;
+    font-family: inherit;
+  }
+
+  .notif-filter.active {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border-color: var(--text-primary);
+  }
+
+  .notif-filter i { font-size: 0.75rem; }
+
   @media (max-width: 768px) {
     .dash-sidebar { display: none; }
     .dash-quick-actions { grid-template-columns: repeat(2, 1fr); }
     .dash-metrics { grid-template-columns: repeat(2, 1fr); }
     .dash-chart-area { grid-template-columns: 1fr; }
     .chrome-actions { display: none; }
+    .list-stats { grid-template-columns: repeat(2, 1fr); }
+    .table-header,
+    .table-row { grid-template-columns: 2fr 1fr 0.8fr; }
+    .table-header span:nth-child(3),
+    .table-row span:nth-child(3) { display: none; }
+    .view-tabs { gap: 0.35rem; }
+    .view-tab { font-size: 0.72rem; padding: 0.4rem 0.8rem; }
   }
 </style>
