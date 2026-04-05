@@ -5,36 +5,42 @@ const features = [
     title: 'Suscripciones',
     description: 'Gestiona planes, controla vencimientos y automatiza renovaciones. Todo el ciclo de vida de tus membresías.',
     color: 'brand',
+    dashboardTab: 2,
   },
   {
     icon: 'bx-group',
     title: 'Clientes',
     description: 'Registro completo con fotos, historial y seguimiento. Búsqueda avanzada y filtros inteligentes.',
     color: 'brand',
+    dashboardTab: 1,
   },
   {
     icon: 'bx-credit-card',
     title: 'Pagos y Cobros',
     description: 'Registra pagos en efectivo, transferencia o tarjeta. Venta rápida y conciliación automática.',
     color: 'brand',
+    dashboardTab: 0,
   },
   {
     icon: 'bx-line-chart',
     title: 'Dashboard en Tiempo Real',
     description: 'Métricas clave al instante: ingresos, gastos, crecimiento de miembros y análisis financiero.',
     color: 'brand',
+    dashboardTab: 0,
   },
   {
     icon: 'bx-bell',
     title: 'Notificaciones',
     description: 'Alertas automáticas de vencimientos, recordatorios por email y notificaciones personalizables.',
     color: 'brand',
+    dashboardTab: 3,
   },
   {
     icon: 'bx-shield-quarter',
     title: 'Control de Acceso',
     description: 'Roles y permisos granulares. Menú dinámico, multi-gimnasio y auditoría de accesos.',
     color: 'brand',
+    dashboardTab: 0,
   },
 ];
 ---
@@ -60,10 +66,10 @@ const features = [
           </div>
           <h3 class="feature-title">{feature.title}</h3>
           <p class="feature-desc">{feature.description}</p>
-          <div class="feature-link">
+          <a href="#dashboard" class="feature-link" data-tab={feature.dashboardTab}>
             <span>Saber más</span>
             <i class='bx bx-right-arrow-alt'></i>
-          </div>
+          </a>
         </div>
       ))}
     </div>
@@ -88,6 +94,10 @@ const features = [
   .feature-card {
     padding: 2rem;
     cursor: default;
+  }
+
+  .feature-link {
+    text-decoration: none;
   }
 
   .feature-icon {
@@ -134,3 +144,16 @@ const features = [
     gap: 0.75rem;
   }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>('.feature-link[data-tab]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const tabIndex = parseInt(link.getAttribute('data-tab') || '0');
+      // Give the browser time to scroll, then activate the tab
+      setTimeout(() => {
+        const tab = document.querySelector<HTMLButtonElement>(`.view-tab[data-tab="${tabIndex}"]`);
+        if (tab) tab.click();
+      }, 400);
+    });
+  });
+</script>
