@@ -560,8 +560,10 @@
   .view-tabs {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 0.5rem;
     margin-bottom: 1.5rem;
+    overflow-x: hidden;
   }
 
   .view-tab {
@@ -600,6 +602,7 @@
     border: 1px solid var(--border);
     box-shadow: var(--shadow-lg), 0 0 60px rgba(255, 255, 255, 0.03);
     max-width: 1000px;
+    width: 100%;
     margin: 0 auto;
   }
 
@@ -1120,16 +1123,34 @@
   .notif-filter i { font-size: 0.75rem; }
 
   @media (max-width: 768px) {
+    .dashboard-section { overflow-x: hidden; }
     .dash-sidebar { display: none; }
     .dash-quick-actions { grid-template-columns: repeat(2, 1fr); }
     .dash-metrics { grid-template-columns: repeat(2, 1fr); }
     .dash-chart-area { grid-template-columns: 1fr; }
     .chrome-actions { display: none; }
     .list-stats { grid-template-columns: repeat(2, 1fr); }
-    .table-header,
-    .table-row { grid-template-columns: 2fr 1fr 0.8fr; }
-    .table-header span:nth-child(3),
-    .table-row span:nth-child(3) { display: none; }
+
+    /* Standard table: hide 3rd column */
+    .table-header:not(.notif-cols),
+    .table-row:not(.notif-cols) { grid-template-columns: 2fr 1fr 0.8fr; }
+    .table-header:not(.notif-cols) span:nth-child(3),
+    .table-row:not(.notif-cols) span:nth-child(3) { display: none; }
+
+    /* Notif table: show only Client + Type + Status */
+    .table-header.notif-cols,
+    .table-row.notif-cols { grid-template-columns: 2fr 1.2fr 0.8fr; }
+    .table-header.notif-cols span:nth-child(3),
+    .table-row.notif-cols > *:nth-child(3) { display: none; }
+
+    /* List page header: stack vertically */
+    .list-page-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .list-actions { width: 100%; }
+    .list-search { flex: 1; }
+
+    /* Hide notification filter buttons on mobile (saves space) */
+    .notif-filter-group { display: none; }
+
     .view-tabs { gap: 0.35rem; }
     .view-tab { font-size: 0.72rem; padding: 0.4rem 0.8rem; }
   }
