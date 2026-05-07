@@ -7,11 +7,11 @@ const whatsappNumber = '593987371697';
 
   <div class="container cta-container">
     <h2 class="cta-title">
-      ¿Listo para transformar<br/>tu gimnasio?
+      Empieza gratis hoy,<br/>sin compromisos
     </h2>
     <p class="cta-description">
-      Estamos en <strong>fase de lanzamiento inicial</strong>. Aprovecha los descuentos exclusivos
-      disponibles solo por tiempo limitado. Completa el formulario y te contactamos hoy mismo.
+      Crea tu cuenta y obtén <strong>30 días gratis del plan Pro</strong> con todas las funciones premium.
+      Después, quédate con el <strong>plan Free para siempre</strong> o elige el plan que mejor se adapte a ti.
     </p>
 
     <form id="leadForm" class="lead-form" novalidate>
@@ -78,12 +78,12 @@ const whatsappNumber = '593987371697';
 
       <button type="submit" class="btn btn-primary btn-lg btn-submit" id="submitBtn">
         <i class='bx bx-rocket'></i>
-        <span>Comenzar Prueba Gratis</span>
+        <span>Probar Pro Gratis por 30 Días</span>
       </button>
 
       <p class="cta-note">
         <i class='bx bx-check-circle'></i>
-        14 días gratis · Sin tarjeta · Cancela cuando quieras
+        30 días de Pro gratis · Sin tarjeta · Luego Free para siempre
       </p>
     </form>
 
@@ -93,7 +93,7 @@ const whatsappNumber = '593987371697';
         <i class='bx bx-check-circle'></i>
       </div>
       <h3>¡Gracias por tu interés!</h3>
-      <p>Te redirigimos a WhatsApp para comenzar tu prueba gratuita...</p>
+      <p>Te redirigimos a WhatsApp para activar tus 30 días de Pro gratis...</p>
       <a id="whatsappLink" href="#" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
         <i class='bx bxl-whatsapp'></i>
         Abrir WhatsApp
@@ -325,7 +325,7 @@ const whatsappNumber = '593987371697';
 
       // Build WhatsApp message
       const gymText = gym ? ` del gimnasio "${gym}"` : '';
-      const message = `¡Hola! Soy ${name}${gymText}. Me interesa probar AtheneaFit. Mi correo es ${email} y mi teléfono ${phone}. ¿Me pueden ayudar con la prueba gratuita?`;
+      const message = `¡Hola! Soy ${name}${gymText}. Me interesa probar AtheneaFit Pro por 30 días gratis. Mi correo es ${email} y mi teléfono ${phone}. ¿Me pueden ayudar a comenzar?`;
       const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
       // Try to send to Formspree (optional — configure your form ID)
