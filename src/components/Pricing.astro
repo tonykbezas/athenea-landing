@@ -9,9 +9,10 @@ const plans = [
       'Suscripciones ilimitadas',
       'Registro de ventas ilimitado',
       '10 productos activos',
-      '70 clientes activos',
+      '50 clientes activos',
       'Métricas esenciales',
-      '1 administrador + 2 entrenadores',
+      '1 administrador',
+      'Soporte básico (tiempo de respuesta estándar)',
     ],
     highlight: false,
     comingSoon: false,
@@ -33,6 +34,7 @@ const plans = [
       'Campañas de descuentos y promociones',
       'Reportes avanzados exportables a Excel',
       'Dashboard financiero',
+      'Soporte prioritario (atención preferencial)',
     ],
     highlight: true,
     comingSoon: false,
@@ -49,7 +51,7 @@ const plans = [
       'Integraciones con torniquetes',
       'Control de acceso por QR',
       'Notificaciones por WhatsApp',
-      'Soporte prioritario dedicado',
+      'Soporte VIP dedicado',
     ],
     highlight: false,
     comingSoon: false,
@@ -69,6 +71,13 @@ const plans = [
       <p class="section-subtitle">
         Gratis para siempre. Sin tarjeta de crédito. Actualiza cuando lo necesites.
       </p>
+
+      <div class="pricing-notice">
+        <div class="notice-icon">🎁</div>
+        <p class="notice-text">
+          <strong>Beneficio de inicio:</strong> Todas las cuentas nuevas comienzan con <strong>30 días de Plan Pro de cortesía</strong>. Al finalizar, puedes continuar usando el <strong>Plan Free gratis para siempre</strong>, sin cargos automáticos ni pérdida de datos.
+        </p>
+      </div>
     </div>
 
     <div class="pricing-grid grid grid-3">
@@ -228,5 +237,43 @@ const plans = [
     width: 100%;
     padding: 0.875rem;
     font-size: 0.9375rem;
+  }
+
+  .pricing-notice {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed var(--border);
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-lg);
+    max-width: 680px;
+    margin: 1.5rem auto 0 auto;
+    text-align: left;
+  }
+
+  .notice-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .notice-text {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .notice-text strong {
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 640px) {
+    .pricing-notice {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 1rem;
+    }
   }
 </style>
