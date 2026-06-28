@@ -1,18 +1,18 @@
 ---
-const plans = [
+const fallbackPlans = [
   {
     name: 'Free',
     price: '0',
     period: 'para siempre',
     description: 'Todo lo esencial para gestionar tu gimnasio sin costo.',
     features: [
-      'Suscripciones ilimitadas',
-      'Registro de ventas ilimitado',
-      '10 productos activos',
-      '50 clientes activos',
-      'Métricas esenciales',
-      '1 administrador',
-      'Soporte básico (tiempo de respuesta estándar)',
+      { text: 'Suscripciones ilimitadas', included: true },
+      { text: 'Registro de ventas ilimitado', included: true },
+      { text: '10 productos activos', included: true },
+      { text: '50 clientes activos', included: true },
+      { text: 'Métricas esenciales', included: true },
+      { text: '1 administrador', included: true },
+      { text: 'Soporte básico (tiempo de respuesta estándar)', included: true },
     ],
     highlight: false,
     comingSoon: false,
@@ -25,16 +25,16 @@ const plans = [
     period: '/mes',
     description: 'Para gimnasios en crecimiento que necesitan más poder.',
     features: [
-      'Todo lo de Free +',
-      'Productos ilimitados',
-      'Clientes ilimitados',
-      '4 administradores + 10 entrenadores',
-      'Notificaciones por email',
-      'Engagement, cumpleaños y recordatorios',
-      'Campañas de descuentos y promociones',
-      'Reportes avanzados exportables a Excel',
-      'Dashboard financiero',
-      'Soporte prioritario (atención preferencial)',
+      { text: 'Todo lo de Free +', included: true },
+      { text: 'Productos ilimitados', included: true },
+      { text: 'Clientes ilimitados', included: true },
+      { text: '4 administradores + 10 entrenadores', included: true },
+      { text: 'Notificaciones por email', included: true },
+      { text: 'Engagement, cumpleaños y recordatorios', included: true },
+      { text: 'Campañas de descuentos y promociones', included: true },
+      { text: 'Reportes avanzados exportables a Excel', included: true },
+      { text: 'Dashboard financiero', included: true },
+      { text: 'Soporte prioritario (atención preferencial)', included: true },
     ],
     highlight: true,
     comingSoon: false,
@@ -46,18 +46,65 @@ const plans = [
     period: '/mes',
     description: 'Control total para operaciones avanzadas y cadenas.',
     features: [
-      'Todo lo de Pro +',
-      'Administradores y entrenadores ilimitados',
-      'Integraciones con torniquetes',
-      'Control de acceso por QR',
-      'Notificaciones por WhatsApp',
-      'Soporte VIP dedicado',
+      { text: 'Todo lo de Pro +', included: true },
+      { text: 'Administradores y entrenadores ilimitados', included: true },
+      { text: 'Integraciones con torniquetes', included: true },
+      { text: 'Control de acceso por QR', included: true },
+      { text: 'Notificaciones por WhatsApp', included: true },
+      { text: 'Soporte VIP dedicado', included: true },
     ],
     highlight: false,
     comingSoon: false,
     cta: 'Contactar Ventas',
   },
 ];
+
+let plans = fallbackPlans;
+
+try {
+  const apiUrl = import.meta.env.PUBLIC_API_URL || 'https://atheneafit.com/api/plans/';
+  const response = await fetch(apiUrl);
+  if (response.ok) {
+    const text = await response.text();
+    // Parse JSON only if it looks like JSON to avoid parsing HTML redirect page
+    if (text.trim().startsWith('{') || text.trim().startsWith('[')) {
+      const data = JSON.parse(text);
+      if (data && Array.isArray(data.plans) && data.plans.length > 0) {
+        plans = data.plans.map((p) => {
+          const isFree = !p.is_purchasable || p.price_monthly === 0;
+          let ctaText = 'Comenzar';
+          if (isFree) {
+            ctaText = 'Empezar Gratis';
+          } else if (p.name.toLowerCase().includes('pro')) {
+            ctaText = 'Comenzar con Pro';
+          } else if (p.name.toLowerCase().includes('enterprise') || p.name.toLowerCase().includes('business')) {
+            ctaText = 'Contactar Ventas';
+          } else {
+            ctaText = `Comenzar con ${p.name}`;
+          }
+
+          return {
+            name: p.name,
+            price: isFree ? '0' : Math.round(p.price_monthly).toString(),
+            period: isFree ? 'para siempre' : '/mes',
+            description: p.tagline || '',
+            features: p.features || [],
+            highlight: p.is_recommended,
+            comingSoon: false,
+            isFree: isFree,
+            cta: ctaText,
+          };
+        });
+      }
+    } else {
+      console.warn(`[Pricing.astro] API at ${apiUrl} returned non-JSON content. Using local plans.`);
+    }
+  } else {
+    console.warn(`[Pricing.astro] API at ${apiUrl} returned status ${response.status}. Using local plans.`);
+  }
+} catch (e) {
+  console.warn('[Pricing.astro] Failed to fetch plans from API, falling back to local plans:', e);
+}
 ---
 
 <section id="pricing" class="pricing-section">
@@ -95,9 +142,9 @@ const plans = [
 
           <ul class="plan-features">
             {plan.features.map((feat) => (
-              <li>
-                <i class='bx bx-check'></i>
-                <span>{feat}</span>
+              <li class={feat.included ? '' : 'not-included'}>
+                <i class={feat.included ? 'bx bx-check' : 'bx bx-lock-alt'}></i>
+                <span>{feat.text}</span>
               </li>
             ))}
           </ul>
@@ -231,6 +278,15 @@ const plans = [
     color: var(--text-primary);
     font-size: 1.1rem;
     flex-shrink: 0;
+  }
+
+  .plan-features li.not-included {
+    color: var(--text-muted);
+    opacity: 0.65;
+  }
+
+  .plan-features li.not-included i {
+    color: var(--text-muted);
   }
 
   .btn-plan {
