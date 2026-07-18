@@ -1,8 +1,11 @@
 ---
+const API_URL = import.meta.env.PUBLIC_API_URL || 'https://app.atheneafit.com/api/plans/';
+
 const fallbackPlans = [
   {
     name: 'Free',
     price: '0',
+    currency: 'USD',
     period: 'para siempre',
     description: 'Todo lo esencial para gestionar tu gimnasio sin costo.',
     features: [
@@ -22,6 +25,7 @@ const fallbackPlans = [
   {
     name: 'Pro',
     price: '19',
+    currency: 'USD',
     period: '/mes',
     description: 'Para gimnasios en crecimiento que necesitan más poder.',
     features: [
@@ -43,6 +47,7 @@ const fallbackPlans = [
   {
     name: 'Enterprise',
     price: '49',
+    currency: 'USD',
     period: '/mes',
     description: 'Control total para operaciones avanzadas y cadenas.',
     features: [
@@ -58,56 +63,10 @@ const fallbackPlans = [
     cta: 'Contactar Ventas',
   },
 ];
-
-let plans = fallbackPlans;
-
-try {
-  const apiUrl = import.meta.env.PUBLIC_API_URL || 'https://atheneafit.com/api/plans/';
-  const response = await fetch(apiUrl);
-  if (response.ok) {
-    const text = await response.text();
-    // Parse JSON only if it looks like JSON to avoid parsing HTML redirect page
-    if (text.trim().startsWith('{') || text.trim().startsWith('[')) {
-      const data = JSON.parse(text);
-      if (data && Array.isArray(data.plans) && data.plans.length > 0) {
-        plans = data.plans.map((p) => {
-          const isFree = !p.is_purchasable || p.price_monthly === 0;
-          let ctaText = 'Comenzar';
-          if (isFree) {
-            ctaText = 'Empezar Gratis';
-          } else if (p.name.toLowerCase().includes('pro')) {
-            ctaText = 'Comenzar con Pro';
-          } else if (p.name.toLowerCase().includes('enterprise') || p.name.toLowerCase().includes('business')) {
-            ctaText = 'Contactar Ventas';
-          } else {
-            ctaText = `Comenzar con ${p.name}`;
-          }
-
-          return {
-            name: p.name,
-            price: isFree ? '0' : Math.round(p.price_monthly).toString(),
-            period: isFree ? 'para siempre' : '/mes',
-            description: p.tagline || '',
-            features: p.features || [],
-            highlight: p.is_recommended,
-            comingSoon: false,
-            isFree: isFree,
-            cta: ctaText,
-          };
-        });
-      }
-    } else {
-      console.warn(`[Pricing.astro] API at ${apiUrl} returned non-JSON content. Using local plans.`);
-    }
-  } else {
-    console.warn(`[Pricing.astro] API at ${apiUrl} returned status ${response.status}. Using local plans.`);
-  }
-} catch (e) {
-  console.warn('[Pricing.astro] Failed to fetch plans from API, falling back to local plans:', e);
-}
 ---
 
-<section id="pricing" class="pricing-section">
+
+<section id="pricing" class="pricing-section" data-api-url={API_URL}>
   <div class="container">
     <div class="pricing-header">
       <div class="section-label">
@@ -128,13 +87,13 @@ try {
     </div>
 
     <div class="pricing-grid grid grid-3">
-      {plans.map((plan) => (
+      {fallbackPlans.map((plan) => (
         <div class={`pricing-card card ${plan.highlight ? 'highlighted' : ''}`}>
           {plan.highlight && <div class="popular-badge">⭐ Más Popular</div>}
           {plan.isFree && <div class="free-badge">✨ Gratis por siempre</div>}
           <div class="plan-name">{plan.name}</div>
           <div class="plan-price">
-            <span class="currency">$</span>
+            <span class="currency">{plan.currency === 'EUR' ? '€' : '$'}</span>
             <span class="amount">{plan.price}</span>
             <span class="period">{plan.period}</span>
           </div>
@@ -158,7 +117,7 @@ try {
   </div>
 </section>
 
-<style>
+<style is:global>
 
   .pricing-section {
     background: var(--bg-body);
@@ -333,3 +292,150 @@ try {
     }
   }
 </style>
+
+<script>
+  // ---------------------------------------------------------------------------
+  // Client-side plan hydration
+  // Fetches the live plan catalog from the Django API on every page load so the
+  // landing always reflects the current state in the DB (no rebuild needed).
+  // If the fetch fails for any reason the static fallback cards stay visible.
+  //
+  // Supports regional pricing: sends ?country=XX from localStorage (set by
+  // the navbar country selector) or lets Cloudflare resolve via CF-IPCountry.
+  // ---------------------------------------------------------------------------
+
+  const CURRENCY_SYMBOLS = { USD: '$', EUR: '€' };
+
+  function getCurrencySymbol(code) {
+    return CURRENCY_SYMBOLS[code] || code + ' ';
+  }
+
+  async function fetchAndRenderPlans() {
+    const section = document.getElementById('pricing');
+    const grid = section?.querySelector('.pricing-grid');
+    if (!section || !grid) return;
+
+    const apiUrl = section.dataset.apiUrl;
+    if (!apiUrl) return;
+
+    // Build URL with country param if saved
+    const savedCountry = localStorage.getItem('athena_country');
+    const url = new URL(apiUrl);
+    if (savedCountry) {
+      url.searchParams.set('country', savedCountry);
+    }
+
+    try {
+      const res = await fetch(url.toString());
+      if (!res.ok) return;
+
+      const text = await res.text();
+      // Only parse if the response looks like JSON (avoids HTML redirect pages)
+      if (!text.trim().startsWith('{') && !text.trim().startsWith('[')) return;
+
+      const data = JSON.parse(text);
+      if (!data?.plans?.length) return;
+
+      // If country was detected by the API and user hasn't picked one,
+      // update the navbar flag to match
+      if (data.country_detected && data.country && !savedCountry) {
+        localStorage.setItem('athena_country', data.country);
+        window.dispatchEvent(new CustomEvent('country-detected', {
+          detail: { country: data.country }
+        }));
+      }
+
+      // Map API response to the card shape
+      const plans = data.plans.map((p) => {
+        const isFree = !p.is_purchasable || p.price_monthly === 0;
+        const planCurrency = p.currency || data.currency || 'USD';
+        let cta = 'Comenzar';
+        if (isFree) cta = 'Empezar Gratis';
+        else if (p.name.toLowerCase().includes('pro')) cta = 'Comenzar con Pro';
+        else if (
+          p.name.toLowerCase().includes('enterprise') ||
+          p.name.toLowerCase().includes('business')
+        )
+          cta = 'Contactar Ventas';
+        else cta = `Comenzar con ${p.name}`;
+
+        return {
+          name: p.name,
+          price: isFree ? '0' : Math.round(p.price_monthly).toString(),
+          currencySymbol: getCurrencySymbol(planCurrency),
+          period: isFree ? 'para siempre' : '/mes',
+          description: p.tagline || '',
+          features: p.features || [],
+          highlight: p.is_recommended,
+          isFree,
+          cta,
+        };
+      });
+
+      // ---- Animate the swap ----
+      grid.style.transition = 'opacity 0.25s ease';
+      grid.style.opacity = '0';
+      await new Promise((r) => setTimeout(r, 260));
+
+      // Adapt grid columns when plan count differs from fallback
+      if (plans.length !== 3) {
+        grid.style.gridTemplateColumns = `repeat(${Math.min(plans.length, 3)}, 1fr)`;
+        if (plans.length < 3) {
+          grid.style.maxWidth = `${plans.length * 420}px`;
+          grid.style.marginInline = 'auto';
+        }
+      } else {
+        grid.style.gridTemplateColumns = '';
+        grid.style.maxWidth = '';
+        grid.style.marginInline = '';
+      }
+
+      grid.innerHTML = plans
+        .map(
+          (plan) => `
+        <div class="pricing-card card ${plan.highlight ? 'highlighted' : ''}">
+          ${plan.highlight ? '<div class="popular-badge">⭐ Más Popular</div>' : ''}
+          ${plan.isFree ? '<div class="free-badge">✨ Gratis por siempre</div>' : ''}
+          <div class="plan-name">${plan.name}</div>
+          <div class="plan-price">
+            <span class="currency">${plan.currencySymbol}</span>
+            <span class="amount">${plan.price}</span>
+            <span class="period">${plan.period}</span>
+          </div>
+          <p class="plan-desc">${plan.description}</p>
+          <ul class="plan-features">
+            ${plan.features
+              .map(
+                (f) => `
+              <li class="${f.included ? '' : 'not-included'}">
+                <i class="${f.included ? 'bx bx-check' : 'bx bx-lock-alt'}"></i>
+                <span>${f.text}</span>
+              </li>`
+              )
+              .join('')}
+          </ul>
+          <a href="#cta" class="btn ${plan.highlight ? 'btn-primary' : 'btn-secondary'} btn-plan">
+            ${plan.cta}
+          </a>
+        </div>`
+        )
+        .join('');
+
+      // Fade in the fresh cards
+      requestAnimationFrame(() => {
+        grid.style.opacity = '1';
+      });
+    } catch (e) {
+      // Silently keep the static fallback plans on any network/parsing error
+      console.warn('[Pricing] Client-side fetch failed, keeping static plans:', e);
+    }
+  }
+
+  // Initial fetch
+  fetchAndRenderPlans();
+
+  // Re-fetch when user changes country from the navbar selector
+  window.addEventListener('country-changed', () => {
+    fetchAndRenderPlans();
+  });
+</script>

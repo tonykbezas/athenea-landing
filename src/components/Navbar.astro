@@ -16,6 +16,23 @@
     </div>
 
     <div class="navbar-actions">
+      <!-- Country Selector -->
+      <div class="country-selector" id="countrySelector">
+        <button class="country-toggle" id="countryToggle" aria-label="Seleccionar país" title="Seleccionar país">
+          <span class="country-flag" id="currentFlag">🌎</span>
+          <i class='bx bx-chevron-down country-chevron'></i>
+        </button>
+        <div class="country-dropdown" id="countryDropdown">
+          <div class="country-dropdown-header">
+            <i class='bx bx-globe'></i>
+            <span>Selecciona tu país</span>
+          </div>
+          <div class="country-list" id="countryList">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
       <a href="https://app.atheneafit.com" class="btn btn-outline btn-nav" target="_blank" rel="noopener">
         <i class='bx bx-log-in'></i>
         Ingresar
@@ -109,6 +126,175 @@
     padding: 0.25rem;
   }
 
+  /* ─── Country Selector ─── */
+  .country-selector {
+    position: relative;
+  }
+
+  .country-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.35rem 0.6rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    color: var(--text-secondary);
+  }
+
+  .country-toggle:hover {
+    background: var(--bg-secondary-hover);
+    border-color: var(--text-muted);
+  }
+
+  .country-flag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .flag-img {
+    width: 20px;
+    height: auto;
+    border-radius: 2px;
+    object-fit: cover;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  }
+
+  .country-chevron {
+    font-size: 0.85rem;
+    transition: transform 0.25s ease;
+  }
+
+  .country-selector.open .country-chevron {
+    transform: rotate(180deg);
+  }
+
+  .country-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    width: 240px;
+    max-height: 360px;
+    background: rgba(28, 30, 34, 0.97);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255,255,255,0.08);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1100;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .country-selector.open .country-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .country-dropdown-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid var(--border-light);
+    flex-shrink: 0;
+  }
+
+  .country-dropdown-header i {
+    font-size: 0.9rem;
+  }
+
+  .country-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    overflow-y: auto;
+    padding: 0.35rem;
+    flex: 1;
+  }
+
+  .country-list::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .country-list::-webkit-scrollbar-thumb {
+    background: var(--bg-secondary-hover);
+    border-radius: 2px;
+  }
+
+  :global(.country-option) {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.5rem 0.65rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border: none !important;
+    background: none !important;
+    width: 100% !important;
+    box-sizing: border-box;
+    text-align: left;
+    color: var(--text-secondary) !important;
+    font-family: inherit;
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  :global(.country-option:hover) {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+  }
+
+  :global(.country-option.active) {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: var(--text-primary) !important;
+  }
+
+  :global(.country-option .opt-flag) {
+    width: 20px;
+    height: auto;
+    border-radius: 2px;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  }
+
+  :global(.country-option .opt-name) {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: inherit;
+  }
+
+  :global(.country-option .opt-check) {
+    font-size: 0.9rem;
+    color: var(--accent-success);
+    opacity: 0;
+    transition: opacity 0.15s;
+    flex-shrink: 0;
+  }
+
+  :global(.country-option.active .opt-check) {
+    opacity: 1;
+  }
+
   @media (max-width: 768px) {
     .navbar-links {
       display: none;
@@ -143,10 +329,121 @@
       padding: 0.4rem 1rem;
       font-size: 0.8rem;
     }
+
+    .country-dropdown {
+      right: -1rem;
+      width: 220px;
+    }
   }
 </style>
 
 <script>
+  // ─── Country Selector Logic ───
+  const COUNTRIES = [
+    { code: 'EC', name: 'Ecuador' },
+    { code: 'CO', name: 'Colombia' },
+    { code: 'PE', name: 'Perú' },
+    { code: 'MX', name: 'México' },
+    { code: 'AR', name: 'Argentina' },
+    { code: 'CL', name: 'Chile' },
+    { code: 'ES', name: 'España' },
+    { code: 'VE', name: 'Venezuela' },
+    { code: 'BO', name: 'Bolivia' },
+    { code: 'PY', name: 'Paraguay' },
+    { code: 'UY', name: 'Uruguay' },
+    { code: 'CR', name: 'Costa Rica' },
+    { code: 'PA', name: 'Panamá' },
+    { code: 'GT', name: 'Guatemala' },
+    { code: 'HN', name: 'Honduras' },
+    { code: 'SV', name: 'El Salvador' },
+    { code: 'NI', name: 'Nicaragua' },
+    { code: 'DO', name: 'Rep. Dominicana' },
+  ];
+
+  const LS_KEY = 'athena_country';
+  const selector = document.getElementById('countrySelector');
+  const toggleBtn = document.getElementById('countryToggle');
+  const dropdown = document.getElementById('countryDropdown');
+  const flagEl = document.getElementById('currentFlag');
+  const listEl = document.getElementById('countryList');
+
+  // Build list
+  if (listEl) {
+    listEl.innerHTML = COUNTRIES.map(c => `
+      <button class="country-option" data-code="${c.code}">
+        <img class="opt-flag" src="https://flagcdn.com/w40/${c.code.toLowerCase()}.png" alt="${c.name}" />
+        <span class="opt-name">${c.name}</span>
+        <i class="bx bx-check opt-check"></i>
+      </button>
+    `).join('');
+  }
+
+  function getSelectedCountry() {
+    return localStorage.getItem(LS_KEY) || null;
+  }
+
+  function setSelectedCountry(code) {
+    localStorage.setItem(LS_KEY, code);
+    updateUI(code);
+    window.dispatchEvent(new CustomEvent('country-changed', { detail: { country: code } }));
+  }
+
+  function updateUI(code) {
+    const entry = COUNTRIES.find(c => c.code === code);
+    if (flagEl) {
+      if (entry) {
+        flagEl.innerHTML = `<img class="flag-img" src="https://flagcdn.com/w40/${entry.code.toLowerCase()}.png" alt="${entry.name}" />`;
+      } else {
+        flagEl.textContent = '🌎';
+      }
+    }
+    // Update active class
+    listEl?.querySelectorAll('.country-option').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.code === code);
+    });
+  }
+
+  // Toggle dropdown
+  toggleBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    selector?.classList.toggle('open');
+  });
+
+  // Option click
+  listEl?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.country-option');
+    if (!btn) return;
+    setSelectedCountry(btn.dataset.code);
+    selector?.classList.remove('open');
+  });
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!selector?.contains(e.target)) {
+      selector?.classList.remove('open');
+    }
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      selector?.classList.remove('open');
+    }
+  });
+
+  // Init: restore saved country
+  const saved = getSelectedCountry();
+  if (saved) {
+    updateUI(saved);
+  }
+
+  // Listen for auto-detection from Cloudflare (via Pricing API response)
+  window.addEventListener('country-detected', (e) => {
+    const code = e.detail?.country;
+    if (code) updateUI(code);
+  });
+
+  // ─── Mobile Toggle Logic ───
   const toggle = document.getElementById('mobileToggle');
   const links = document.getElementById('navLinks');
   if (toggle && links) {
